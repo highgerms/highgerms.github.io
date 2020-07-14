@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据结构学习知识准备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构0-数据结构学习准备">
+<meta property="og:url" content="http://yoursite.com/2020/07/14/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%840-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据结构学习知识准备">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-14T03:46:01.000Z">
+<meta property="article:modified_time" content="2020-07-14T03:46:52.648Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="知识">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/14/数据结构0-数据结构学习准备/"/>
+
+
+
+
+
+  <title>数据结构0-数据结构学习准备 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/14/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%840-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构0-数据结构学习准备</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-14T11:46:01+08:00">
+                2020-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  数据结构学习知识准备
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据结构在各种语言中地位非常重要，数据结构对语言而言犹如内功之于武功。</p>
+<h2 id="First-strp-Chunk-it-up"><a href="#First-strp-Chunk-it-up" class="headerlink" title="First strp:Chunk it up"></a>First strp:Chunk it up</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将知识点切碎，把每一个部分单独拎出来，刻意化练习，并自己做出带有每个数据结构特点的脑图)</span><br></pre></td></tr></table></figure>
+<h2 id="Second-step-Deliberate-Practicing"><a href="#Second-step-Deliberate-Practicing" class="headerlink" title="Second step: Deliberate Practicing"></a>Second step: Deliberate Practicing</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用刻意练习进行学习算法题目-过遍数（切题），一个算法题，做一遍是完全不够的。练得越多，基本功越强（典型题目虽然比较枯燥，但是要坚持练习）</span><br><span class="line">不能只学习高大上的框架（不踏实） 练习缺陷、弱点地方 会有不舒服、不爽、枯燥的地方</span><br></pre></td></tr></table></figure>
+<h2 id="Third-step-Feedback"><a href="#Third-step-Feedback" class="headerlink" title="Third step: Feedback"></a>Third step: Feedback</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主动反馈：看职业选手第一视角（可以看到精彩操作），高手代码（github、leetcode、</span><br><span class="line">被动反馈：高手给你指点（比如老师、大佬知道你的代码）</span><br></pre></td></tr></table></figure>
+
+<h2 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h2><p>visual studio code  一个轻量级的代码编辑器，有LeetCode插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ 切记 学习不是一步走完的</span><br></pre></td></tr></table></figure>
+
+<p>学习数据结构中，要坚持做题(leetcode、etc)</p>
+<h2 id="单题目切题四件套"><a href="#单题目切题四件套" class="headerlink" title="单题目切题四件套"></a>单题目切题四件套</h2><p>把题目看清楚<br>想所有可能的解法，比较不同算法的时间、空间复杂度<br>写代码<br>测试样例</p>
+<p>#算法与数据结构：数据结构大致分为以下三类，算法大致分为8部分</p>
+<h2 id="数据结构一：一维数据结构"><a href="#数据结构一：一维数据结构" class="headerlink" title="数据结构一：一维数据结构"></a>数据结构一：一维数据结构</h2><p>基础：数组array(string)、链表 linked list<br>高级：栈stack、队列queue、双端队列deque、集合set、映射map(hash or map)、etc</p>
+<h2 id="数据结构二：二维数据结构（从一维泛化而来）"><a href="#数据结构二：二维数据结构（从一维泛化而来）" class="headerlink" title="数据结构二：二维数据结构（从一维泛化而来）"></a>数据结构二：二维数据结构（从一维泛化而来）</h2><p>基础：树tree、图graph<br>高级：二叉搜索树binary search tree(red-black tree,AVL)、堆heap、并查集disjoint set、字典树Trie、etc</p>
+<h2 id="数据结构三：特殊数据结构（主要用于工程中特定情境）"><a href="#数据结构三：特殊数据结构（主要用于工程中特定情境）" class="headerlink" title="数据结构三：特殊数据结构（主要用于工程中特定情境）"></a>数据结构三：特殊数据结构（主要用于工程中特定情境）</h2><p>位运算Bitwise、布隆过滤器Bloomfilter<br>LRU Cache</p>
+<h2 id="算法分为8大部分（所有复杂的算法最后其实就是找他的重复单元是什么）"><a href="#算法分为8大部分（所有复杂的算法最后其实就是找他的重复单元是什么）" class="headerlink" title="算法分为8大部分（所有复杂的算法最后其实就是找他的重复单元是什么）"></a>算法分为8大部分（所有复杂的算法最后其实就是找他的重复单元是什么）</h2><p>前三部分最基础(基石）##<br>1 跳转 If-else,switch-&gt;branch<br>2 循环 for, while loop -&gt;Iteration<br>3 递归 Recursion(Divide&amp;Conquer,Backtrace)<br>4 搜索 search:深度优先搜索 Depth first search,广度优先搜索 Breadth first search,etc<br>5 动态规划 Dynamic Programming<br>6 二分查找 BInary Search<br>7 贪心 Greedy<br>8 数学 MATH,几何 Geometry</p>
+<blockquote>
+<p>注意：在头脑中回忆上面每种算法的思想和代码模板</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%9F%A5%E8%AF%86/" rel="tag"># 知识</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/14/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#First-strp-Chunk-it-up"><span class="nav-number">1.</span> <span class="nav-text">First strp:Chunk it up</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-step-Deliberate-Practicing"><span class="nav-number">2.</span> <span class="nav-text">Second step: Deliberate Practicing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Third-step-Feedback"><span class="nav-number">3.</span> <span class="nav-text">Third step: Feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具准备"><span class="nav-number">4.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单题目切题四件套"><span class="nav-number">5.</span> <span class="nav-text">单题目切题四件套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构一：一维数据结构"><span class="nav-number">6.</span> <span class="nav-text">数据结构一：一维数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构二：二维数据结构（从一维泛化而来）"><span class="nav-number">7.</span> <span class="nav-text">数据结构二：二维数据结构（从一维泛化而来）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构三：特殊数据结构（主要用于工程中特定情境）"><span class="nav-number">8.</span> <span class="nav-text">数据结构三：特殊数据结构（主要用于工程中特定情境）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法分为8大部分（所有复杂的算法最后其实就是找他的重复单元是什么）"><span class="nav-number">9.</span> <span class="nav-text">算法分为8大部分（所有复杂的算法最后其实就是找他的重复单元是什么）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
