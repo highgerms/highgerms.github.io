@@ -241,7 +241,13 @@ mark {
 }
 
 .bg-color {
-    background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+    /* background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%); */
+    /* background-image: linear-gradient(to right, #c0ebb0 0%, #60cc36 100%);  */
+    /* background-image: linear-gradient(to right, #f2afb9 0%, #c0ebb0 100%);  */
+    /* background-image: linear-gradient(to right, #f7ccd3 0%, #e14960 100%);  */
+    background-image: linear-gradient(to right, #ffa892 0%, #bb65be 100%); 
+    opacity: 1;
+    
 }
 
 .text-color {
@@ -257,8 +263,9 @@ mark {
     position: fixed;
     bottom: 0;
     z-index: 300;
-    background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
-    opacity: 0.8;
+    /* background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%); */
+    background-image: linear-gradient(to right, #ffa892 0%, #bb65be 100%); 
+    opacity: 1;
 }
 
 .sidenav-overlay {
