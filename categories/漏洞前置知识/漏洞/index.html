@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类, 域名之外">
+    <meta name="keywords" content="Category: 漏洞, 域名之外">
     <meta name="description" content="域名之外">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类 | 域名之外</title>
+    <title>Category: 漏洞 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -378,7 +378,7 @@
                 
                 <a href="/categories/%E6%BC%8F%E6%B4%9E/" title="漏洞: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
+                             chip-active "
                             style="background-color: #F9EBEA;">漏洞
                         <span class="tag-length">1</span>
                     </span>
@@ -432,7 +432,7 @@
                 
                 <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/%E6%BC%8F%E6%B4%9E/" title="漏洞: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
+                             chip-active "
                             style="background-color: #82E0AA;">漏洞
                         <span class="tag-length">1</span>
                     </span>
@@ -446,65 +446,73 @@
 
 
     
-    <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
 
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
-    </div>
-</div>
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/04/26/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="CORS漏洞（1）：前置知识">
+                            
+                            <span class="card-title">CORS漏洞（1）：前置知识</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                跨域资源共享（Cross origin  resource sharing，CORS），本文讲学习cors漏洞的前置知识：同源概念、同源要素、跨域、JSONP等基础内容。
 
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
 
-    
 
-    let option = {
-        title: {
-            left: 'center',
-            text: '文章分类雷达图',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"漏洞","max":2},{"name":"闲聊","max":2},{"name":"CTF出题","max":2},{"name":"红蓝对抗","max":2},{"name":"漏洞前置知识","max":2},{"name":"红队","max":2},{"name":"漏洞","max":2}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [1,1,1,1,1,1,1],
-                    name : '文章分类数'
-                }
-            ]
-        }]
-    };
+1：前置知识-同源策略：1.1 产生原因：同源策略限制从一个源
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    漏洞前置知识
+                                </a>
+                                
+                                <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/%E6%BC%8F%E6%B4%9E/" class="post-category">
+                                    漏洞
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    radarChart.setOption(option);
-</script>
-
-    
-
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                            <span class="chip bg-color">漏洞</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/">
+                            <span class="chip bg-color">漏洞前置知识</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </article>
 </main>
+
+
 
 
     <footer class="page-footer bg-color nav-transparent">
