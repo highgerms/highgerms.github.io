@@ -393,6 +393,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -405,12 +408,12 @@
 <p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230824110018375.png" alt="image-20230824110018375"></p>
 <h5 id="去掉这两把√-Intruder"><a href="#去掉这两把√-Intruder" class="headerlink" title="去掉这两把√ -Intruder"></a>去掉这两把√ -Intruder</h5><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230824110147669.png" alt="image-20230824110147669"></p>
 <h5 id="去掉这两把√-Proxy"><a href="#去掉这两把√-Proxy" class="headerlink" title="去掉这两把√ -Proxy"></a>去掉这两把√ -Proxy</h5><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230824110323639.png" alt="image-20230824110323639"></p>
-<h4 id="2：指纹特征：http-burp-favicon-ico-和burp报错信息-蓝方可识别"><a href="#2：指纹特征：http-burp-favicon-ico-和burp报错信息-蓝方可识别" class="headerlink" title="2：指纹特征：http://burp/favicon.ico  和burp报错信息  蓝方可识别"></a>2：指纹特征：<a target="_blank" rel="noopener" href="http://burp/favicon.ico">http://burp/favicon.ico</a>  和burp报错信息  蓝方可识别</h4><p>参考链接：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10268">https://xz.aliyun.com/t/10268</a>    【HW多人运动溯源及反制指北】</p>
+<h3 id="2：指纹特征：http-burp-favicon-ico-和burp报错信息-蓝方可识别"><a href="#2：指纹特征：http-burp-favicon-ico-和burp报错信息-蓝方可识别" class="headerlink" title="2：指纹特征：http://burp/favicon.ico  和burp报错信息  蓝方可识别"></a>2：指纹特征：<a target="_blank" rel="noopener" href="http://burp/favicon.ico">http://burp/favicon.ico</a>  和burp报错信息  蓝方可识别</h3><p>参考链接：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10268">https://xz.aliyun.com/t/10268</a>    【HW多人运动溯源及反制指北】</p>
 <p>利用跨域去获取burp 的指纹。</p>
 <p>针对burp 指纹的反制 ，当攻击者使用默认配置的burp，很多指纹能够被精准识别到</p>
 <p>1: 利用跨域去获取burp 的指纹，然后可以干很多事情，比如引入到蜜罐流量进行精准id 识别。</p>
 <p>eg ：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;http://burp/favicon.ico&quot; onload=&quot;alert(&#x27;found burp&#x27;)&quot; &gt;</span><br><span class="line">&lt;script src=&quot;http://burp/jquery.js&quot; onload=&quot;alert(&#x27;found burp&#x27;)&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;http://burp/favicon.ico&quot; onload=&quot;alert(&#x27;found burp&#x27;)&quot; &gt;</span><br><span class="line">&lt;script src=&quot;http://burp/jquery.js&quot; onload=&quot;alert(&#x27;found burp&#x27;)&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230824110546850.png" alt="image-20230824110546850"></p>
 <p>有些网站为了安全性，会禁止用户使用burp并进行拦截。</p>
@@ -638,6 +641,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

@@ -395,6 +395,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -472,12 +475,12 @@
 <h5 id="2-1-1：斯巴达棒（Scytale）"><a href="#2-1-1：斯巴达棒（Scytale）" class="headerlink" title="2.1.1：斯巴达棒（Scytale）"></a>2.1.1：斯巴达棒（Scytale）</h5><p>斯巴达棒又称为密码棒，它由一条皮带（带状物）和一根木棍（圆柱体）组成。将写有明文信息的皮带缠绕到木棍外侧后观察木棍，即可得到字母被重新排列的密文。</p>
 <p><strong>实践：</strong></p>
 <p>将明文信息 WE ARE DISCOVERED（意为：我们被发现了）用斯巴达棒密码进行加密，设置木棍（圆柱体）一周能容纳五个字母。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">明文信息：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line">——————————————</span><br><span class="line">WEARE</span><br><span class="line">DISCO</span><br><span class="line">VERED</span><br><span class="line">——————————————</span><br><span class="line">WDV EIE ASR RCE EOD</span><br><span class="line">密文为：WDVEIEASRRCEEOD</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文信息：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line">——————————————</span><br><span class="line">WEARE</span><br><span class="line">DISCO</span><br><span class="line">VERED</span><br><span class="line">——————————————</span><br><span class="line">WDV EIE ASR RCE EOD</span><br><span class="line">密文为：WDVEIEASRRCEEOD</span><br></pre></td></tr></table></figure>
 
 <h5 id="2-1-2：栅栏密码（Rail-Fence-Cipher）"><a href="#2-1-2：栅栏密码（Rail-Fence-Cipher）" class="headerlink" title="2.1.2：栅栏密码（Rail Fence Cipher）"></a>2.1.2：栅栏密码（Rail Fence Cipher）</h5><p>栅栏密码又称篱笆密码。明文向斜下方写入假想的栅栏和连续的“轨道”上，触底时向斜上方继续书写，如此反复。最后按行读取，形成密文。</p>
 <p><strong>实践：</strong></p>
 <p>将明文信息 WE ARE DISCOVERED FLEE AT ONCE（意为：我们被发现了，立即撤退）用栅栏密码进行加密，设置使用三条“轨道”加密。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">明文信息：</span><br><span class="line">WE ARE DISCOVERED FLEE AT ONCE</span><br><span class="line">——————————————-------------------------------------</span><br><span class="line">W . . . E . . . C . . . R . . . L . . . T . . . E</span><br><span class="line">. E . R . D . S . O . E . E . F . E . A . O . C .</span><br><span class="line">. . A . . . I . . . V . . . D . . . E . . . N . .</span><br><span class="line">——————————————-------------------------------------</span><br><span class="line">WECRL TEERD SOEEF EAOCA IVDEN</span><br><span class="line">密文为：</span><br><span class="line">WECRLTEERDSOEEFEAOCAIVDEN</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文信息：</span><br><span class="line">WE ARE DISCOVERED FLEE AT ONCE</span><br><span class="line">——————————————-------------------------------------</span><br><span class="line">W . . . E . . . C . . . R . . . L . . . T . . . E</span><br><span class="line">. E . R . D . S . O . E . E . F . E . A . O . C .</span><br><span class="line">. . A . . . I . . . V . . . D . . . E . . . N . .</span><br><span class="line">——————————————-------------------------------------</span><br><span class="line">WECRL TEERD SOEEF EAOCA IVDEN</span><br><span class="line">密文为：</span><br><span class="line">WECRLTEERDSOEEFEAOCAIVDEN</span><br></pre></td></tr></table></figure>
 
 <h4 id="2-2：代换密码"><a href="#2-2：代换密码" class="headerlink" title="2.2：代换密码"></a>2.2：代换密码</h4><p>代换密码不改变明文中各字符的位置，但会改变字符本身。代换密码按照（同一个字母在加密时是否<strong>完全是被同一固定的字母代换</strong>）可分为单表代换密码和多表代换密码。</p>
 <h5 id="2-2-1-棋盘密码（Polybius-）"><a href="#2-2-1-棋盘密码（Polybius-）" class="headerlink" title="2.2.1 棋盘密码（Polybius ）"></a>2.2.1 棋盘密码（Polybius ）</h5><p>棋盘密码是利用波利比奥斯方阵(Polybius Square)进行加密的密码方法。5行5列的方阵用来排列26个字母（其中I和J在同一格），这样就可以用某个字母对应的行列数表示它，达到加密目的。</p>
@@ -594,17 +597,17 @@
 </tbody></table>
 <p><strong>实践</strong>：</p>
 <p>将明文信息“WE ARE DISCOVERED”（意为：我们被发现了），根据上述的波利比奥斯（Polybius）棋盘密码表进行加密：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">5215 114215 14244313345115421514</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">5215 114215 14244313345115421514</span><br></pre></td></tr></table></figure>
 
 <h5 id="2-2-2：培根密码（Bacon‘s-Cipher）"><a href="#2-2-2：培根密码（Bacon‘s-Cipher）" class="headerlink" title="2.2.2：培根密码（Bacon‘s Cipher）"></a>2.2.2：培根密码（Bacon‘s Cipher）</h5><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240228230350620.png" alt="image-20240228230350620"></p>
 <p>培根密码：将明文中的每个字母转换成一组五个英文字母，即可得到密文。它有个特点是密文只存在字母A和B。</p>
 <p>培根通常有两种不同的转换规则，一种为即I与J、U与V使用相同的编码，一种为I与J、U与V都使用不同编码。</p>
 <p>培根密码密码表：（这个是使用相同编码的加密表）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a   AAAAA   g     AABBA   n    ABBAA   t     BAABA</span><br><span class="line">b   AAAAB   h     AABBB   o    ABBAB   u-v   BAABB</span><br><span class="line">c   AAABA   i-j   ABAAA   p    ABBBA   w     BABAA</span><br><span class="line">d   AAABB   k     ABAAB   q    ABBBB   x     BABAB</span><br><span class="line">e   AABAA   l     ABABA   r    BAAAA   y     BABBA</span><br><span class="line">f   AABAB   m     ABABB   s    BAAAB   z     BABBB</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a   AAAAA   g     AABBA   n    ABBAA   t     BAABA</span><br><span class="line">b   AAAAB   h     AABBB   o    ABBAB   u-v   BAABB</span><br><span class="line">c   AAABA   i-j   ABAAA   p    ABBBA   w     BABAA</span><br><span class="line">d   AAABB   k     ABAAB   q    ABBBB   x     BABAB</span><br><span class="line">e   AABAA   l     ABABA   r    BAAAA   y     BABBA</span><br><span class="line">f   AABAB   m     ABABB   s    BAAAB   z     BABBB</span><br></pre></td></tr></table></figure>
 
 <p><strong>例子</strong></p>
 <p>将明文信息“WE ARE DISCOVERED”（意为：我们被发现了），根据上述的培根密码表进行加密：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">BABAAAABAA AAAAABAAAAAABAA AAABBABAAABAAABAAABAABBABBAABBAABAABAAAAAABAAAAABB</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">BABAAAABAA AAAAABAAAAAABAA AAABBABAAABAAABAAABAABBABBAABBAABAABAAAAAABAAAAABB</span><br></pre></td></tr></table></figure>
 
 <h5 id="2-2-3：摩斯密码（Morse-Cipher）"><a href="#2-2-3：摩斯密码（Morse-Cipher）" class="headerlink" title="2.2.3：摩斯密码（Morse Cipher）"></a>2.2.3：摩斯密码（Morse Cipher）</h5><p>摩斯密码（又叫做摩尔斯密码）是一种时通时断的信号代码，这种信号代码通过不同的排列顺序来表达不同的英文字母、数字和标点符号等。</p>
 <p>摩尔斯电码的数字有长码和短码，通常用长码，于中文电码中组成汉字则使用短码。</p>
@@ -615,16 +618,16 @@
 <p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240228232149146.png" alt="image-20240228232149146"></p>
 <p><strong>实践：</strong></p>
 <p>将明文信息“WE ARE DISCOVERED”（意为：我们被发现了），根据上述的摩斯密码表进行加密：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">.--/./.-/.-././-../../.../-.-./---/...-/./.-././-..</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">.--/./.-/.-././-../../.../-.-./---/...-/./.-././-..</span><br></pre></td></tr></table></figure>
 
 <h5 id="2-2-4：凯撒密码（Caesar-Cipher）"><a href="#2-2-4：凯撒密码（Caesar-Cipher）" class="headerlink" title="2.2.4：凯撒密码（Caesar Cipher）"></a>2.2.4：凯撒密码（Caesar Cipher）</h5><p>凯撒密码的加密方式是明文中的所有字母都在字母表上向后（或向前）按照一个固定数目（密钥n）进行偏移后被替换成密文。</p>
 <p>当偏移量是左移3的时候：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">明文字母表：ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line">密文字母表：DEFGHIJKLMNOPQRSTUVWXYZABC</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文字母表：ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line">密文字母表：DEFGHIJKLMNOPQRSTUVWXYZABC</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240228233325082.png" alt="image-20240228233325082"></p>
 <p><strong>实践：</strong></p>
 <p>将明文信息“WE ARE DISCOVERED”（意为：我们被发现了），根据上述的凯撒密码密文字母表进行加密：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">ZH DUH GLVFRYHUHG</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">ZH DUH GLVFRYHUHG</span><br></pre></td></tr></table></figure>
 
 <h5 id="2-2-5：维吉尼亚密码（Vigenere-Cipher）"><a href="#2-2-5：维吉尼亚密码（Vigenere-Cipher）" class="headerlink" title="2.2.5：维吉尼亚密码（Vigenère Cipher）"></a>2.2.5：维吉尼亚密码（Vigenère Cipher）</h5><p>维吉尼亚密码是使用一系列偏移量不同的凯撒密码组成密码字母表的加密算法，属于多表密码的一种简单形式。</p>
 <p>为了生成密码，需要使用表格法。这一表格包括了26行字母表，每一行都由前一行向左偏移一位得到。具体使用哪一行字母表进行编译是基于密钥进行的，在过程中会不断地变换。（密钥长度需要与明文长度相同，如果少于明文长度，则重复拼接直到相同。）</p>
@@ -632,7 +635,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240228234307313.png" alt="image-20240228234307313"></p>
 <p><strong>实践：</strong></p>
 <p>将明文信息“WE ARE DISCOVERED”（意为：我们被发现了），根据上述的维吉尼亚密码表（选择的关键词为：dongpo）进行加密：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">选择关键词dongpo并重复达到明文相同长度而得到密钥，密钥为：</span><br><span class="line">dongpodongpodon</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">ZS NXT RLGPUKSUSQ</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">明文：</span><br><span class="line">WE ARE DISCOVERED</span><br><span class="line"></span><br><span class="line">选择关键词dongpo并重复达到明文相同长度而得到密钥，密钥为：</span><br><span class="line">dongpodongpodon</span><br><span class="line"></span><br><span class="line">密文：</span><br><span class="line">ZS NXT RLGPUKSUSQ</span><br></pre></td></tr></table></figure>
 
 <p>还有很多其他的古典加密方式没写到这篇文章里面，但是相信上面的内容如果都理解完了，无论你以后遇到的是哪种密码究竟是置换还是代换类型的随便能判断清楚了。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240228235035799.png" alt="image-20240228235035799"></p>
@@ -787,7 +790,56 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/06/06/hexo%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                <a href="/2022/01/10/ctf%E5%87%BA%E9%A2%98-%E7%BD%91%E5%AE%89%E7%9F%A5%E8%AF%86%E9%A2%98%E7%9B%AE/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="ctf出题-网安知识题目">
+                        
+                        <span class="card-title">ctf出题-网安知识题目</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            最近校赛CTF出题，写了些题目 有关于网安专业知识的：比如操作系统、逆向工程的、漏洞、应急响应、计算机网络，当然也有好玩的题目。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF%E5%87%BA%E9%A2%98/" class="post-category">
+                                    CTF出题
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%90%86%E8%AE%BA%E9%A2%98%E7%9B%AE/">
+                        <span class="chip bg-color">理论题目</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/06/hexo%E7%9A%84%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
                         
@@ -803,9 +855,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -830,56 +882,6 @@
             </div>
         </div>
         
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/04/10/%E8%BD%BB%E6%9D%BE%E5%85%A5%E9%97%A8%EF%BC%9A%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%AD%A6%E7%9A%84%E8%89%BA%E6%9C%AF%E4%B9%8B%E6%97%85/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="轻松入门：古典密码学的艺术之旅">
-                        
-                        <span class="card-title">轻松入门：古典密码学的艺术之旅</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            最近专业课在上密码学，密码学是一门非常有魅力的课程，所以有了这篇文章。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/" class="post-category">
-                                    密码学
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/">
-                        <span class="chip bg-color">古典密码</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
     </div>
 </article>
 
@@ -890,6 +892,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

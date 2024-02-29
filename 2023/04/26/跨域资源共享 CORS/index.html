@@ -396,6 +396,9 @@ CORS漏洞（1）：前置知识 😊1：前置知识-同源策略：1.1 产生�
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -409,7 +412,7 @@ CORS漏洞（1）：前置知识 😊1：前置知识-同源策略：1.1 产生�
 <p>如果要跨域通信，必须要引入跨域资源共享，如果没有正确配置，就会导致漏洞产生。</p>
 <p>即使是同一个ip，不同域名也不是同源，这样的话同源策略里允许发出请求，但是不允许访问响应。</p>
 <h4 id="1-3-同源实例："><a href="#1-3-同源实例：" class="headerlink" title="1.3 同源实例："></a>1.3 同源实例：</h4><p>  设 <a target="_blank" rel="noopener" href="http://test.com/a/123.html">http://test.com/a/123.html</a> 源</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http://test.com/a/asd.html  同源  路径不同</span><br><span class="line">http://test.com/abcvb/123.html  同源  路径不同</span><br><span class="line">http://test.com/abc/123458.html  同源  路径不同</span><br><span class="line">https://test.com/a/1234.html  不同源  协议不同</span><br><span class="line">http://test.com:88/a/1234.html  不同源  端口不同</span><br><span class="line">http://test.com:82/a/1234.html  不同源  端口不同</span><br><span class="line">http://bbb.test.com/a/1234.html  不同源  域名不同，子域名不算同源</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://test.com/a/asd.html  同源  路径不同</span><br><span class="line">http://test.com/abcvb/123.html  同源  路径不同</span><br><span class="line">http://test.com/abc/123458.html  同源  路径不同</span><br><span class="line">https://test.com/a/1234.html  不同源  协议不同</span><br><span class="line">http://test.com:88/a/1234.html  不同源  端口不同</span><br><span class="line">http://test.com:82/a/1234.html  不同源  端口不同</span><br><span class="line">http://bbb.test.com/a/1234.html  不同源  域名不同，子域名不算同源</span><br></pre></td></tr></table></figure>
 
 
 
@@ -649,6 +652,9 @@ CORS漏洞（1）：前置知识 😊1：前置知识-同源策略：1.1 产生�
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
