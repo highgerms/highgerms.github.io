@@ -4,13 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="域名之外">
-    <meta name="description" content="
-title: WIN+R实用大总结😊date: 2022-07-25 22:10:00author: highgermscategories:    - 效率提升技巧tags:
-- 效率提升技巧
+    <meta name="keywords" content="注册表重定向, 域名之外">
+    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向的问题，需要好好了解清楚。
 
 
-Windows的各种快捷键用好会提高">
+
+重定向技术重定向技术适用版本：Windows XP X64、Windows Server 2003 X64及以后的X64版本。
+重定向技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +22,7 @@ Windows的各种快捷键用好会提高">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>域名之外</title>
+    <title>注册表重定向 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -325,12 +325,12 @@ Windows的各种快捷键用好会提高">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">注册表重定向</h1>
                 </div>
             </div>
         </div>
@@ -352,12 +352,25 @@ Windows的各种快捷键用好会提高">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BC%96%E5%86%99%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
+                                <span class="chip bg-color">编写合规基线相关</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E5%86%99%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/" class="post-category">
+                                编写合规基线相关
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -366,7 +379,7 @@ Windows的各种快捷键用好会提高">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2024-02-29
+                    2022-07-19
                 </div>
                 
 
@@ -387,128 +400,47 @@ Windows的各种快捷键用好会提高">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>title: WIN+R实用大总结😊<br>date: 2022-07-25 22:10:00<br>author: highgerms<br>categories:<br>    - 效率提升技巧<br>tags:</p>
-<pre><code>- 效率提升技巧
-</code></pre>
-<hr>
-<p>Windows的各种快捷键用好会提高很高的效率，命令行一下子输入完了，别人都还在傻傻找入口，是不是很快乐。</p>
+                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向的问题，需要好好了解清楚。</p>
 <span id="more"></span>
 
-<h1 id="WIN-R-实用大总结-😊"><a href="#WIN-R-实用大总结-😊" class="headerlink" title="WIN+R  实用大总结 😊"></a>WIN+R  实用大总结 😊</h1><p>[TOC]</p>
-<p>%windir% 是 <strong>Windows</strong> 的安装文件夹</p>
-<h3 id="cmd-与管理员cmd"><a href="#cmd-与管理员cmd" class="headerlink" title="cmd 与管理员cmd"></a>cmd 与管理员cmd</h3><p>cmd.exe的路径是C:\Windows\system32\cmd</p>
-<p>ps：如果是非管理员身份运行cmd，会有很多操作出现问题  【比如cscript test.vbs 等】</p>
-<p>winR  输入 cmd                                            ———&gt;  cmd命令行 </p>
-<p>winR  输入 cmd，然后Ctrl+shift+enter   ———&gt;   管理员下的cmd命令行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720105427401.png" alt="image-20220720105427401"></p>
-<p>方法2：打开管理员下的cmd命令行【winR  输入<strong>runas &#x2F;user:administrator Cmd</strong> 】，但是这种方法需要administrator设置密码</p>
-<p>方法3：设置快捷方式，区分cmd和管理员cmd，一劳永逸，具体操作如下链接</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42765363/article/details/115214222">通过 Win + R 默认以管理员身份打开 cmd</a></p>
-<h3 id="打开网络共享中心-：ncpa-cpl"><a href="#打开网络共享中心-：ncpa-cpl" class="headerlink" title="打开网络共享中心 ：ncpa.cpl"></a>打开网络共享中心 ：ncpa.cpl</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720112637622.png" alt="image-20220720112637622" style="zoom: 67%;" />
 
-
-
-
-
-
-
-
-
-<h3 id="打开画画：mspaint"><a href="#打开画画：mspaint" class="headerlink" title="打开画画：mspaint"></a>打开画画：mspaint</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720112759110.png" alt="image-20220720112759110" style="zoom:67%;" />
-
-
-
-
-
-
-
-
-
-
-
-<h3 id="打开系统配置：msconfig"><a href="#打开系统配置：msconfig" class="headerlink" title="打开系统配置：msconfig"></a>打开系统配置：msconfig</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720112848089.png" alt="image-20220720112848089" style="zoom:67%;" />
-
-
-
-<h3 id="打开设备管理器：devmgmt-msc"><a href="#打开设备管理器：devmgmt-msc" class="headerlink" title="打开设备管理器：devmgmt.msc"></a>打开设备管理器：devmgmt.msc</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720112934428.png" alt="image-20220720112934428" style="zoom:67%;" />
-
-
-
-
-
-<h3 id="打开远程桌面连接：mstsc"><a href="#打开远程桌面连接：mstsc" class="headerlink" title="打开远程桌面连接：mstsc"></a>打开远程桌面连接：mstsc</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720113044035.png" alt="image-20220720113044035" style="zoom:67%;" />
-
-
-
-<h3 id="任务管理器：taskmgr"><a href="#任务管理器：taskmgr" class="headerlink" title="任务管理器：taskmgr"></a>任务管理器：taskmgr</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720113140895.png" alt="image-20220720113140895" style="zoom:67%;" />
-
-
-
-
-
-<h3 id="系统属性：sysdm-cpl-【查看计算机名字、重命名计算机名字、查看设备管理信息、创建系统还原点、远程协助设置】"><a href="#系统属性：sysdm-cpl-【查看计算机名字、重命名计算机名字、查看设备管理信息、创建系统还原点、远程协助设置】" class="headerlink" title="系统属性：sysdm.cpl   【查看计算机名字、重命名计算机名字、查看设备管理信息、创建系统还原点、远程协助设置】"></a>系统属性：sysdm.cpl   【查看计算机名字、重命名计算机名字、查看设备管理信息、创建系统还原点、远程协助设置】</h3><p><strong>CPL文件，又叫控制面板项（Control Panel  Item），多保存于系统安装目录的system32文件夹下，它们分别对应着控制面板中的项目，普通用户的访问受到限制。它可由shell32.dll、control.exe打开。此外，你也可以直接在资源管理器中双击调用Open命令打开（实质上调用了shell32.dll）。</strong></p>
-<p>计算机名字可以看【计算机名，cmd下hostname也行】</p>
-<p>环境变量可以在这里看【高级】</p>
-<p>创建系统还原点和进行系统还原都可以在【系统保护中查看】</p>
-<img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720113328931.png" alt="image-20220720113328931" style="zoom:67%;" />
-
-
-
-<h3 id="注册表：regedit"><a href="#注册表：regedit" class="headerlink" title="注册表：regedit"></a>注册表：regedit</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720144437552.png" alt="image-20220720144437552" style="zoom:67%;" />
-
-
-
-<h3 id="组件服务：dcomcnfg"><a href="#组件服务：dcomcnfg" class="headerlink" title="组件服务：dcomcnfg"></a>组件服务：dcomcnfg</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720144507062.png" alt="image-20220720144507062" style="zoom:67%;" />
-
-<h3 id="本地计算机策略：gpedit-msc"><a href="#本地计算机策略：gpedit-msc" class="headerlink" title="本地计算机策略：gpedit.msc"></a>本地计算机策略：gpedit.msc</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720144605490.png" alt="image-20220720144605490"></p>
-<h3 id="关机-重启-shutdown-s-r-t-0-c-“”"><a href="#关机-重启-shutdown-s-r-t-0-c-“”" class="headerlink" title="关机&#x2F;重启 shutdown -s&#x2F;-r -t 0 -c “”"></a>关机&#x2F;重启 shutdown -s&#x2F;-r -t 0 -c “”</h3><p>-s 关机</p>
-<p>-r 重启</p>
-<p>-t 时间</p>
-<p>-c 提示内容</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720154237589.png" alt="image-20220720154237589"></p>
-<h3 id="系统自带计算器-calc"><a href="#系统自带计算器-calc" class="headerlink" title="系统自带计算器 calc"></a>系统自带计算器 calc</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720154451071.png" alt="image-20220720154451071" style="zoom:67%;" />
-
-
-
-
-
-<h3 id="资源管理器-explorer"><a href="#资源管理器-explorer" class="headerlink" title="资源管理器 explorer"></a>资源管理器 explorer</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720154622769.png" alt="image-20220720154622769" style="zoom:67%;" />
-
-
-
-
-
-<h3 id="管理控制台-mmc"><a href="#管理控制台-mmc" class="headerlink" title="管理控制台 mmc"></a>管理控制台 mmc</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720154657176.png" alt="image-20220720154657176" style="zoom:67%;" />
-
-
-
-
-
-<h3 id="打开我的文档-英文句号"><a href="#打开我的文档-英文句号" class="headerlink" title="打开我的文档  英文句号(.)"></a>打开我的文档  英文句号(.)</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220720154750384.png" alt="image-20220720154750384" style="zoom:67%;" />
-
-
-
-
-
-<h3 id="声音管理器-mmsys-cpl"><a href="#声音管理器-mmsys-cpl" class="headerlink" title="声音管理器 mmsys.cpl"></a>声音管理器 mmsys.cpl</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721092901030.png" alt="image-20220721092901030"></p>
-<h3 id="计算机管理-compmgmt-msc"><a href="#计算机管理-compmgmt-msc" class="headerlink" title="计算机管理 compmgmt.msc"></a>计算机管理 compmgmt.msc</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721093653072.png" alt="1"></p>
-<h4 id="性能监视器-perfmon"><a href="#性能监视器-perfmon" class="headerlink" title="性能监视器 perfmon"></a>性能监视器 perfmon</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721093228370.png" alt="image-20220721093228370"></p>
-<h4 id="事件查看器-eventvwr"><a href="#事件查看器-eventvwr" class="headerlink" title="事件查看器 eventvwr"></a>事件查看器 eventvwr</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721093147966.png" alt="image-20220721093147966"></p>
-<h4 id="本地服务-services-msc"><a href="#本地服务-services-msc" class="headerlink" title="本地服务  services.msc"></a>本地服务  services.msc</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721093522492.png" alt="image-20220721093522492"></p>
-<h4 id="磁盘管理-diskmgmt-msc"><a href="#磁盘管理-diskmgmt-msc" class="headerlink" title="磁盘管理  diskmgmt.msc"></a>磁盘管理  diskmgmt.msc</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721093843442.png" alt="image-20220721093843442"></p>
-<h4 id="设备管理器-devmgmt-msc"><a href="#设备管理器-devmgmt-msc" class="headerlink" title="设备管理器  devmgmt.msc"></a>设备管理器  devmgmt.msc</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721093950104.png" alt="image-20220721093950104"></p>
-<h4 id="本地用户和组-lusrmgr-msc"><a href="#本地用户和组-lusrmgr-msc" class="headerlink" title="本地用户和组 lusrmgr.msc"></a>本地用户和组 lusrmgr.msc</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721094034608.png" alt="image-20220721094034608"></p>
-<h3 id="组策略-gpedit-msc"><a href="#组策略-gpedit-msc" class="headerlink" title="组策略 gpedit.msc"></a>组策略 gpedit.msc</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721094249722.png" alt="image-20220721094249722"></p>
-<h3 id="任务管理器-taskmgr"><a href="#任务管理器-taskmgr" class="headerlink" title="任务管理器  taskmgr"></a>任务管理器  taskmgr</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721094338743.png" alt="image-20220721094338743"></p>
-<h3 id="证书管理-certmgr-msc"><a href="#证书管理-certmgr-msc" class="headerlink" title="证书管理  certmgr.msc"></a>证书管理  certmgr.msc</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721094501244.png" alt="image-20220721094501244"></p>
-<h3 id="本地安全策略-secpol-msc"><a href="#本地安全策略-secpol-msc" class="headerlink" title="本地安全策略 secpol.msc"></a>本地安全策略 secpol.msc</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721094533266.png" alt="image-20220721094533266"></p>
-<h3 id="系统信息-msinfo32"><a href="#系统信息-msinfo32" class="headerlink" title="系统信息 msinfo32"></a>系统信息 msinfo32</h3><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220721151826192.png" alt="image-20220721151826192" style="zoom:67%;" />
-
-
-
-<p>参考资料：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40287093/article/details/82807075">快速入门Win+R命令（附图）</a></p>
+<h1 id="重定向技术"><a href="#重定向技术" class="headerlink" title="重定向技术"></a>重定向技术</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
+<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
+<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
+<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
+<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
+<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
+<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
+<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
+<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
+<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
+<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
+<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
+<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
+<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
+<p>打开64位注册表【运行-&gt;regedit】</p>
+<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
+<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
+<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
+<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
+<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
+<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
+<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
+<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
+<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
+<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
+<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
+<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
+<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
+<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
 
                 
             </div>
@@ -535,7 +467,7 @@ Windows的各种快捷键用好会提高">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2024/02/29/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">http://highgerms.github.io/2024/02/29/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/</a>
+                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -572,7 +504,11 @@ Windows的各种快捷键用好会提高">
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/%E7%BC%96%E5%86%99%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
+                                    <span class="chip bg-color">编写合规基线相关</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -616,44 +552,49 @@ Windows的各种快捷键用好会提高">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2024/02/29/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="WIN+R实用大总结">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">WIN+R实用大总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-title: WIN+R实用大总结😊date: 2022-07-25 22:10:00author: highgermscategories:    - 效率提升技巧tags:
-- 效率提升技巧
-
-
-Windows的各种快捷键用好会提高
+                            Windows的各种快捷键用好会提高很高的效率，命令行一下子输入完了，别人都还在傻傻找入口，是不是很快乐。
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-29
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            highgerms
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    效率提升技巧
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
+                        <span class="chip bg-color">效率提升技巧</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -664,33 +605,44 @@ Windows的各种快捷键用好会提高
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/02/29/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">
+                <a href="/2022/01/10/ctf%E5%87%BA%E9%A2%98-%E7%BD%91%E5%AE%89%E7%9F%A5%E8%AF%86%E9%A2%98%E7%9B%AE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="ctf出题-网安知识题目">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">ctf出题-网安知识题目</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-title: 注册表重定向date: 2022-07-19 21:20:00author: highgermscategories:    - 编写合规基线相关tags:    - 编写合规基线相关写合规基线规则会遇到注册表匹配不上的问题
+                            最近校赛CTF出题，：有关于网安专业知识的：比如操作系统、逆向工程的、漏洞、应急响应、计算机网络，也出了一些好玩的题目。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-10
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            highgerms
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF%E5%87%BA%E9%A2%98/" class="post-category">
+                                    CTF出题
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF%E5%87%BA%E9%A2%98/">
+                        <span class="chip bg-color">CTF出题</span>
+                    </a>
+                    
                 </div>
                 
             </div>
