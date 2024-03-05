@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="zh-CN">
 
 
 <head>
@@ -58,6 +58,10 @@
 
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery.pjax.js"></script>
+    <script>
+        $(document).pjax('a:not(a[target="_blank"])', '#pjax-container', {fragment: '#pjax-container', timeout: 8000});
+    </script>
 
 <meta name="generator" content="Hexo 7.0.0"></head>
 
@@ -85,7 +89,7 @@
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
-      <span>Index</span>
+      <span>首页</span>
     </a>
     
   </li>
@@ -129,7 +133,7 @@
       
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
-      <span>Me</span>
+      <span>关于</span>
     </a>
     
   </li>
@@ -140,14 +144,14 @@
       
       <i class="fas fa-address-book" style="zoom: 0.6;"></i>
       
-      <span>Friends</span>
+      <span>友情链接</span>
     </a>
     
   </li>
   
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索一下" style="zoom: 0.85;"></i>
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
@@ -167,8 +171,7 @@
         <div class="logo-name">域名之外</div>
         <div class="logo-desc">
             
-              夕阳总会落在你身上，你也会快乐一场。
-              The sun will always fall on you, and you will be happy.
+            Never really desperate, only the lost of the soul.
             
         </div>
     </div>
@@ -181,7 +184,7 @@
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
-			Index
+			首页
 		</a>
           
         </li>
@@ -225,7 +228,7 @@
 			
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
-			Me
+			关于
 		</a>
           
         </li>
@@ -236,7 +239,7 @@
 			
 			    <i class="fa-fw fas fa-address-book"></i>
 			
-			Friends
+			友情链接
 		</a>
           
         </li>
@@ -244,7 +247,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/highgerms" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -301,7 +304,7 @@
     }
 </style>
 
-<a href="https://github.com/highgerms" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -316,7 +319,9 @@
 
 </header>
 
-    
+
+    <main id="pjax-container">
+        
 
 
 
@@ -365,8 +370,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%BC%8F%E6%B4%9E/" class="post-category">
-                                漏洞
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
                             </a>
                         
                     </div>
@@ -377,7 +382,7 @@
             <div class="post-info">
                 
                 <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2023-04-26
                 </div>
                 
@@ -438,7 +443,7 @@
             <div class="reprint__author">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-user">
-                        作者:
+                        文章作者:
                     </i>
                 </span>
                 <span class="reprint-info">
@@ -448,7 +453,7 @@
             <div class="reprint__type">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-link">
-                        链接:
+                        文章链接:
                     </i>
                 </span>
                 <span class="reprint-info">
@@ -458,13 +463,13 @@
             <div class="reprint__notice">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-copyright">
-                        文章内容:
+                        版权声明:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    非商用 共享4.0原则
+                    本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    如有转载，请注明出处。
+                    许可协议。转载请注明来源
                     <a href="/about" target="_blank">highgerms</a>
                     !
                 </span>
@@ -474,7 +479,7 @@
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -543,7 +548,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/2023/04/27/CORS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">
                     <div class="card-image">
@@ -567,8 +572,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%BC%8F%E6%B4%9E/" class="post-category">
-                                    漏洞
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
                                 </a>
                             
                             
@@ -590,14 +595,14 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WIN+R实用大总结">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="WIN+R实用大总结">
                         
                         <span class="card-title">WIN+R实用大总结</span>
                     </div>
@@ -650,12 +655,8 @@
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
 
 <!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
@@ -663,29 +664,6 @@
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -698,12 +676,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 <!-- TOC 悬浮按钮. -->
 
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
 
 <script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
@@ -713,7 +685,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
+            headingSelector: 'h2, h3, h4, h5'
         });
 
         // Set scroll toc fixed.
@@ -730,41 +702,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         });
 
         
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
     });
 </script>
 
@@ -774,8 +711,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
+    </main>
 
-    <footer class="page-footer bg-color nav-transparent">
+    <footer class="page-footer bg-color">
     
         <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
 <style>
@@ -812,7 +750,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
                    order='random'
                    preload='auto'
                    volume='0.5'
-                   list-folded='false'
+                   list-folded='true'
         >
         </meting-js>
     </div>
@@ -828,10 +766,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2024</span>
+                <span id="year">2019-2024</span>
             
-            |作者&nbsp;<a href="/about" target="_blank">highgerms</a>
-            |&nbsp;主题&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <a href="/about" target="_blank">highgerms</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             
             <br>
             
@@ -841,7 +780,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             
             
                 <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问人次:&nbsp;
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
                     <span id="busuanzi_value_site_pv" class="white-color"></span>
             </span>
             
@@ -864,20 +803,20 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </a>
 
 
-    <a href="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240229185354090.png" class="tooltipped" target="_blank" data-tooltip="看看我的微信公众号呀" https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240229185354090.png" data-position="top" data-delay="50">
-        <i class="fa fa-comments"></i>
+
+
+
+
+
+
+
+
+
+
+
+    <a href="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240229185354090.png" class="tooltipped" target="_blank" data-tooltip="快来看看我的公众号呀~~" data-position="top" data-delay="50">
+        <i class="fab fa-weibo"></i>
     </a>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -894,8 +833,8 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索一下</span>
-            <input type="search" id="searchInput" name="s" placeholder="哈哈哈 不会吧不会吧 不会有人以为这里有SQL注入吧"
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>
@@ -1036,7 +975,7 @@ $(function () {
     
 
     
-    
+
     
 
     <!-- 雪花特效 -->
@@ -1045,10 +984,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->

@@ -240,6 +240,9 @@ mark {
     margin-bottom: 0;
 }
 
+/* .bg-color {
+    background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+} */
 .bg-color {
     /* background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%); */
     /* background-image: linear-gradient(to right, #c0ebb0 0%, #60cc36 100%);  */
@@ -258,6 +261,14 @@ mark {
     color: #fff;
 }
 
+/* .progress-bar {
+    height: 4px;
+    position: fixed;
+    bottom: 0;
+    z-index: 300;
+    background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+    opacity: 0.8;
+} */
 .progress-bar {
     height: 4px;
     position: fixed;
@@ -267,6 +278,7 @@ mark {
     background-image: linear-gradient(to right, #ffa892 0%, #bb65be 100%); 
     opacity: 1;
 }
+
 
 .sidenav-overlay {
     z-index: 500;
@@ -286,6 +298,11 @@ nav {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 7px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
+/* header .nav-transparent {
+    background-color: transparent !important;
+    background-image: none;
+    box-shadow: none;
+} */
 header .nav-transparent {
     background-color: transparent !important;
     background-image: none;
