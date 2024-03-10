@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: 密码学, 域名之外">
-    <meta name="description" content="域名之外">
+    <meta name="keywords" content="CORS漏洞（1）：前置知识, 域名之外">
+    <meta name="description" content="cors跨域资源共享漏洞的前置知识：同源概念、同源要素、跨域、JSONP等基础内容。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: 密码学 | 域名之外</title>
+    <title>CORS漏洞（1）：前置知识 | 域名之外</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -321,223 +321,392 @@
 
 
     <main id="pjax-container">
-        <div class="bg-cover pd-header about-cover">
-    <div class="container">
+        
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CORS漏洞（1）：前置知识</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
     <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                highgerms
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "长期主义者 YYDS",
-                            
-                                "已识乾坤大，犹怜草木青。",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
-</script>
-
-
-    </div>
-</div>
-
-<main class="content">
-
-    
-
-<div id="category-cloud" class="container chip-container">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/%E4%BB%BF%E7%9C%9F%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F/" title="仿真靶机渗透: 8">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">仿真靶机渗透
-                        <span class="tag-length">8</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Web%E5%AE%89%E5%85%A8/" title="Web安全: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">Web安全
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" title="效率提升技巧: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">效率提升技巧
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%97%A5%E5%B8%B8/" title="日常: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">日常
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/CTF%E5%87%BA%E9%A2%98/" title="CTF出题: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">CTF出题
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="使用教程: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">使用教程
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/" title="红蓝对抗: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">红蓝对抗
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%90%88%E8%A7%84%E5%9F%BA%E7%BA%BF/" title="合规基线: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">合规基线
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%B3%95%E5%BE%8B%E6%B3%95%E8%A7%84/" title="法律法规: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">法律法规
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/" title="密码学: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #85C1E9;">密码学
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/python/" title="python: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">python
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    
-
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2020/04/10/%E8%BD%BB%E6%9D%BE%E5%85%A5%E9%97%A8%EF%BC%9A%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%AD%A6%E7%9A%84%E8%89%BA%E6%9C%AF%E4%B9%8B%E6%97%85/">
-                        <div class="card-image tag-image">
-                            
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="轻松入门：古典密码学的艺术之旅">
-                            
-                            <span class="card-title">轻松入门：古典密码学的艺术之旅</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                最近专业课在上密码学，密码学是一门非常有魅力的课程，所以有了这篇文章。😍
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-10
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/" class="post-category">
-                                    密码学
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
                     
-                    <div class="card-action article-tags">
+                    <div class="article-tag">
                         
-                        <a href="/tags/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/">
-                            <span class="chip bg-color">古典密码</span>
-                        </a>
+                            <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/">
+                                <span class="chip bg-color">基础漏洞</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/">
+                                <span class="chip bg-color">漏洞前置知识</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
                         
                     </div>
                     
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-01-26
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>cors跨域资源共享漏洞的前置知识：同源概念、同源要素、跨域、JSONP等基础内容。</p>
+<span id="more"></span>
+<h1 id="CORS漏洞（1）：前置知识-😊"><a href="#CORS漏洞（1）：前置知识-😊" class="headerlink" title="CORS漏洞（1）：前置知识 😊"></a>CORS漏洞（1）：前置知识 😊</h1><h3 id="1：前置知识-同源策略："><a href="#1：前置知识-同源策略：" class="headerlink" title="1：前置知识-同源策略："></a>1：前置知识-同源策略：</h3><h4 id="1-1-产生原因："><a href="#1-1-产生原因：" class="headerlink" title="1.1 产生原因："></a>1.1 产生原因：</h4><p>同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。<strong>它的存在可以保护用户隐私信息，防止身份伪造等(读取Cookie)。</strong></p>
+<h4 id="1-2-含义："><a href="#1-2-含义：" class="headerlink" title="1.2 含义："></a>1.2 含义：</h4><p>同源要： 协议、域名、端口三个都要相同，缺一不可才叫同源。</p>
+<p>同源策略用于限制应用程序之间的资源共享，确保一个应用里的资源只能被本应用的资源所访问。</p>
+<p>如果要跨域通信，必须要引入跨域资源共享，如果没有正确配置，就会导致漏洞产生。</p>
+<p>即使是同一个ip，不同域名也不是同源，这样的话同源策略里允许发出请求，但是不允许访问响应。</p>
+<h4 id="1-3-同源实例："><a href="#1-3-同源实例：" class="headerlink" title="1.3 同源实例："></a>1.3 同源实例：</h4><p>  设 <a target="_blank" rel="noopener" href="http://test.com/a/123.html">http://test.com/a/123.html</a> 源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://test.com/a/asd.html  同源  路径不同</span><br><span class="line">http://test.com/abcvb/123.html  同源  路径不同</span><br><span class="line">http://test.com/abc/123458.html  同源  路径不同</span><br><span class="line">https://test.com/a/1234.html  不同源  协议不同</span><br><span class="line">http://test.com:88/a/1234.html  不同源  端口不同</span><br><span class="line">http://test.com:82/a/1234.html  不同源  端口不同</span><br><span class="line">http://bbb.test.com/a/1234.html  不同源  域名不同，子域名不算同源</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="2：跨域"><a href="#2：跨域" class="headerlink" title="2：跨域"></a>2：跨域</h3><p>由于同源策略的存在【规定不同域的客户端脚本如果没有明确授权允许执行，不能读写另一方的资源。同协议，同端口，同主机名的两个URL才能被认为同源。】，所以如果要跨域通信，必须要引入跨域资源共享 CORS 。</p>
+<p>有一点必须要注意：<strong>跨域并不是请求发不出去，请求能发出去，服务端能收到请求并正常返回结果【返回包响应码还是200，】，只是结果被浏览器拦截了</strong>。之所以会跨域，是因为受到了同源策略的限制，同源策略要求源相同才能正常进行通信，即协议、域名、端口号都完全一致。</p>
+<p>跨域的解决方案是跨域资源共享。</p>
+<h4 id="2-1-原理"><a href="#2-1-原理" class="headerlink" title="2.1 原理"></a>2.1 原理</h4><p>服务器设置Access-Control-Allow-Origin HTTP响应头之后，浏览器将会允许跨域请求。</p>
+<p>CORS是HTML5标准提出的跨域资源共享(Cross Origin Resource Share)，支持GET、POST等<strong>所有</strong>HTTP请求。</p>
+<p>CORS需要服务器端设置<code>Access-Control-Allow-Origin</code>头，否则浏览器会因为安全策略拦截返回的信息。</p>
+<h3 id="3：常见跨域解决方案"><a href="#3：常见跨域解决方案" class="headerlink" title="3：常见跨域解决方案"></a>3：常见跨域解决方案</h3><p>产生于浏览器的同源策略，不同域名、不同端口、不同协议都会构成跨域；但在实际的业务中，很多场景需要进行跨域传递信息，这样就催生出多种跨域方法。</p>
+<h4 id="3-1-CORS-跨域资源共享"><a href="#3-1-CORS-跨域资源共享" class="headerlink" title="3.1 CORS  跨域资源共享"></a>3.1 CORS  跨域资源共享</h4><h4 id="3-2-JSONP"><a href="#3-2-JSONP" class="headerlink" title="3.2 JSONP"></a>3.2 JSONP</h4><p>JSONP 不是一门编程语言，也不是什么特别的技术，它更像一个漏洞，程序员可以利用这个漏洞，实现跨域（可以简单理解为跨域名）传输数据。虽然 JSONP 与 JSON 看起来很像，但它们却是完全不同的。</p>
+<h3 id="4：跨域威胁与漏洞"><a href="#4：跨域威胁与漏洞" class="headerlink" title="4：跨域威胁与漏洞"></a>4：跨域威胁与漏洞</h3><p>引入跨域资源共享之后，如果没有正确配置（或者由于实际业务场景要解决跨域传递信息，会催生很多跨域安全问题），就会导致漏洞产生。</p>
+<p>在不同的业务场景下，各有适合的跨域方式。跨域解决了一些资源共享、信息交互的难题，但是有的跨域方式可能会带来安全问题，如jsonp可导致水坑攻击，<code>&lt;img&gt;</code>等标签会被用来进行xss或csrf攻击。所以，在应用跨域的场景，需要格外注意安全问题。</p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI0MzQ4NTI1OA==&mid=2247484110&idx=1&sn=e738abfa10f0073296afd1657cdd4940">优秀博客文章 | javascript跨域方法总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU3Mzg1NzMyNw==&mid=2247484382&idx=1&sn=e50f68bca13f2d7ec78e94c8f0088583">Cors 跨域漏洞学习与复现 by Redis安全</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">highgerms</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://highgerms.github.io/2023/01/26/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/">http://highgerms.github.io/2023/01/26/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">highgerms</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/">
+                                    <span class="chip bg-color">基础漏洞</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/">
+                                    <span class="chip bg-color">漏洞前置知识</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
             
         </div>
-    </article>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/02/01/CORS%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="CORS漏洞（2）：跨域资源共享漏洞">
+                        
+                        <span class="card-title">CORS漏洞（2）：跨域资源共享漏洞</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            CORS的出现是为了弥补同源策略的不足，它是一种用来绕过同源策略来实现跨域资源访问的一种技术。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">基础漏洞</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/07/25/WIN+R%20%20%E5%AE%9E%E7%94%A8%E5%A4%A7%E6%80%BB%E7%BB%93/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="WIN+R实用大总结">
+                        
+                        <span class="card-title">WIN+R实用大总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            将Windows的各种快捷键记熟会提高效率，我们cmd命令都运行结束了，有些傻孩子都还在找图形化界面入口。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    效率提升技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7/">
+                        <span class="chip bg-color">效率提升技巧</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+
+<!-- 代码块复制 -->
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+    });
+</script>
+
+    
+
 </main>
 
 
